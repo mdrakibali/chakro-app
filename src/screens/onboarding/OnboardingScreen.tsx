@@ -91,11 +91,12 @@ export default function OnboardingScreen() {
 
           {/* Primary Action Button */}
           <AppButton
-            title={isLastSlide ? 'Get Started' : 'Next'}
             onPress={handleNext}
             size="lg"
             className="mt-8 w-full"
-          />
+          >
+            {isLastSlide ? 'Get Started' : 'Next'}
+          </AppButton>
         </View>
       </SafeAreaView>
     </View>

@@ -11,7 +11,6 @@ export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost';
 export type ButtonSize = 'sm' | 'default' | 'md' | 'lg';
 
 export interface AppButtonProps extends PressableProps {
-  title?: string;
   variant?: ButtonVariant;
   size?: ButtonSize;
   loading?: boolean;
@@ -53,9 +52,9 @@ const textSizes: Record<ButtonSize, string> = {
 
 /**
  * Button component following shadcn variant patterns for React Native.
+ * Uses children directly instead of a title prop.
  */
 export default function AppButton({
-  title,
   variant = 'primary',
   size = 'default',
   loading = false,
@@ -69,7 +68,6 @@ export default function AppButton({
   ...props
 }: AppButtonProps) {
   const isDisabled = disabled || loading;
-  const content = title ?? children;
 
   return (
     <Pressable
@@ -92,7 +90,7 @@ export default function AppButton({
       ) : (
         <>
           {leftIcon && <>{leftIcon}</>}
-          {typeof content === 'string' ? (
+          {typeof children === 'string' || typeof children === 'number' ? (
             <AppText
               className={cn(
                 'text-center',
@@ -103,10 +101,10 @@ export default function AppButton({
                 textClassName
               )}
             >
-              {content}
+              {children}
             </AppText>
           ) : (
-            content
+            children
           )}
           {rightIcon && <>{rightIcon}</>}
         </>
