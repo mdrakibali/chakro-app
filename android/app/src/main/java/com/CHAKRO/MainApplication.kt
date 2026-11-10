@@ -20,7 +20,8 @@ class MainApplication : Application(), ReactApplication {
     )
   }
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(null)
+  override fun onCreate() {
+    super.onCreate()
+    loadReactNative(this)
   }
 }
