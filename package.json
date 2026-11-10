@@ -3,17 +3,22 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "android": "react-native run-android",
-    "ios": "react-native run-ios",
-    "lint": "eslint .",
     "start": "react-native start",
+    "connect": "adb connect 192.168.1.56:37459",
+    "dev": "adb reverse tcp:8081 tcp:8081 && scrcpy & adb shell am start -n com.chakro/.MainActivity && react-native start",
+    "android": "adb reverse tcp:8081 tcp:8081 && react-native run-android",
+    "build:apk": "cd android && ./gradlew assembleRelease && cd ..",
+    "clean": "adb shell pm clear com.chakro && cd android && ./gradlew clean && cd ..",
+    "lint": "eslint .",
     "test": "jest"
   },
   "dependencies": {
+    "@react-native/new-app-screen": "0.88.1",
+    "nativewind": "^4.2.7",
     "react": "19.3.0",
     "react-native": "0.88.1",
-    "@react-native/new-app-screen": "0.88.1",
-    "react-native-safe-area-context": "^5.5.2"
+    "react-native-reanimated": "^4.7.1",
+    "react-native-safe-area-context": "^5.11.1"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
@@ -32,8 +37,10 @@
     "@types/react-test-renderer": "^19.1.0",
     "eslint": "^8.19.0",
     "jest": "^29.6.3",
-    "prettier": "2.8.8",
+    "prettier": "^3.9.10",
+    "prettier-plugin-tailwindcss": "^0.5.14",
     "react-test-renderer": "19.3.0",
+    "tailwindcss": "^3.4.19",
     "typescript": "^6.0.3"
   },
   "engines": {
