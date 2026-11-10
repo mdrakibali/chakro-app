@@ -1,8 +1,9 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
-import { Image, Pressable, Text, View } from 'react-native';
+import { Image, Pressable, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { AppButton, AppText } from '../../components/common';
 import { ONBOARDING_SLIDES } from '../../constants/onboarding';
 import { RootStackParamList } from '../../types/navigation';
 
@@ -10,6 +11,7 @@ type NavigationProp = NativeStackNavigationProp<
   RootStackParamList,
   'Onboarding'
 >;
+
 export default function OnboardingScreen() {
   const navigation = useNavigation<NavigationProp>();
   const [activeSlide, setActiveSlide] = useState<number>(0);
@@ -37,8 +39,10 @@ export default function OnboardingScreen() {
         className="absolute inset-0 h-full w-full"
         resizeMode="cover"
       />
+
       {/* Layered Dark Backdrop Overlays for High Contrast */}
       <View className="absolute inset-0 bg-black/20" />
+
       <SafeAreaView className="flex-1 justify-between">
         {/* Top Header with Skip Button */}
         <View className="w-full flex-row justify-end px-6 pt-2">
@@ -47,23 +51,23 @@ export default function OnboardingScreen() {
             hitSlop={12}
             className="rounded-full border border-white/20 bg-black/40 px-4 py-1.5 active:opacity-70"
           >
-            <Text className="font-outfit font-medium text-sm text-white/90">
+            <AppText className="text-sm font-medium text-white/90">
               Skip
-            </Text>
+            </AppText>
           </Pressable>
         </View>
 
         {/* Bottom Content Area */}
         <View className="px-6 pb-6">
           {/* Main Heading */}
-          <Text className="font-outfit font-semibold text-5xl text-gray-300">
+          <AppText className="text-4xl font-bold text-white">
             {currentSlide.title}
-          </Text>
+          </AppText>
 
           {/* Subtitle */}
-          <Text className="mt-3 font-outfit text-lg leading-6 text-gray-300">
+          <AppText className="mt-3 text-lg leading-6 text-gray-300">
             {currentSlide.subtitle}
-          </Text>
+          </AppText>
 
           {/* Pagination Indicators (4 Dots) */}
           <View className="mt-7 flex-row items-center gap-2">
@@ -86,14 +90,12 @@ export default function OnboardingScreen() {
           </View>
 
           {/* Primary Action Button */}
-          <Pressable
+          <AppButton
+            title={isLastSlide ? 'Get Started' : 'Next'}
             onPress={handleNext}
-            className="mt-8 w-full items-center justify-center rounded-2xl bg-primary py-4 active:opacity-90"
-          >
-            <Text className="font-outfit font-bold text-lg text-white">
-              {isLastSlide ? 'Get Started' : 'Next'}
-            </Text>
-          </Pressable>
+            size="lg"
+            className="mt-8 w-full"
+          />
         </View>
       </SafeAreaView>
     </View>

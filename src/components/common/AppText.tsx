@@ -1,44 +1,24 @@
 import React from 'react';
 import { Text, TextProps } from 'react-native';
+import { cn } from '../../utils';
 
-export type TextWeight =
-  | 'thin'
-  | 'light'
-  | 'regular'
-  | 'medium'
-  | 'semibold'
-  | 'bold'
-  | 'extrabold'
-  | 'black';
-
-interface AppTextProps extends TextProps {
-  weight?: TextWeight;
+export interface AppTextProps extends TextProps {
   className?: string;
   children?: React.ReactNode;
 }
 
-const fontMap: Record<TextWeight, string> = {
-  thin: 'Outfit-Thin',
-  light: 'Outfit-Light',
-  regular: 'Outfit-Regular',
-  medium: 'Outfit-Medium',
-  semibold: 'Outfit-SemiBold',
-  bold: 'Outfit-Bold',
-  extrabold: 'Outfit-ExtraBold',
-  black: 'Outfit-Black',
-};
-
+/**
+ * Core typography component built with Tailwind/shadcn patterns.
+ * Supports standard Tailwind font utilities: font-normal, font-medium, font-semibold, font-bold, font-extrabold.
+ */
 export default function AppText({
-  weight = 'regular',
-  className = '',
-  style,
+  className,
   children,
   ...props
 }: AppTextProps) {
   return (
     <Text
-      className={`text-heading ${className}`}
-      style={[{ fontFamily: fontMap[weight] }, style]}
+      className={cn('text-heading font-normal', className)}
       {...props}
     >
       {children}

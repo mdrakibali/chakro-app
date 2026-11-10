@@ -3,14 +3,15 @@ import {
   ActivityIndicator,
   Pressable,
   PressableProps,
-  Text,
 } from 'react-native';
+import { cn } from '../../utils';
+import AppText from './AppText';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost';
-export type ButtonSize = 'sm' | 'md' | 'lg';
+export type ButtonSize = 'sm' | 'default' | 'md' | 'lg';
 
-interface AppButtonProps extends PressableProps {
-  title: string;
+export interface AppButtonProps extends PressableProps {
+  title?: string;
   variant?: ButtonVariant;
   size?: ButtonSize;
   loading?: boolean;
@@ -19,83 +20,69 @@ interface AppButtonProps extends PressableProps {
   textClassName?: string;
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
+  children?: React.ReactNode;
 }
 
+const buttonVariants: Record<ButtonVariant, string> = {
+  primary: 'bg-primary active:opacity-90',
+  secondary: 'bg-secondary active:opacity-80',
+  outline: 'border border-border bg-transparent active:bg-surface/50',
+  ghost: 'bg-transparent active:bg-surface/30',
+};
+
+const buttonSizes: Record<ButtonSize, string> = {
+  sm: 'py-2 px-4 rounded-xl',
+  default: 'py-3.5 px-6 rounded-2xl',
+  md: 'py-3.5 px-6 rounded-2xl',
+  lg: 'py-4 px-8 rounded-2xl',
+};
+
+const textVariants: Record<ButtonVariant, string> = {
+  primary: 'text-white font-bold',
+  secondary: 'text-white font-semibold',
+  outline: 'text-heading font-medium',
+  ghost: 'text-primary font-medium',
+};
+
+const textSizes: Record<ButtonSize, string> = {
+  sm: 'text-sm',
+  default: 'text-base',
+  md: 'text-base',
+  lg: 'text-lg',
+};
+
+/**
+ * Button component following shadcn variant patterns for React Native.
+ */
 export default function AppButton({
   title,
   variant = 'primary',
-  size = 'md',
+  size = 'default',
   loading = false,
   disabled = false,
-  className = '',
-  textClassName = '',
+  className,
+  textClassName,
   leftIcon,
   rightIcon,
+  children,
   onPress,
-  ...rest
+  ...props
 }: AppButtonProps) {
-  const getVariantStyle = () => {
-    switch (variant) {
-      case 'secondary':
-        return 'bg-secondary active:opacity-80';
-      case 'outline':
-        return 'border border-border bg-transparent active:bg-surface/50';
-      case 'ghost':
-        return 'bg-transparent active:bg-surface/30';
-      case 'primary':
-      default:
-        return 'bg-primary active:opacity-90';
-    }
-  };
-
-  const getSizeStyle = () => {
-    switch (size) {
-      case 'sm':
-        return 'py-2 px-4 rounded-xl';
-      case 'lg':
-        return 'py-4 px-8 rounded-2xl';
-      case 'md':
-      default:
-        return 'py-3.5 px-6 rounded-2xl';
-    }
-  };
-
-  const getTextStyle = () => {
-    switch (variant) {
-      case 'outline':
-        return 'text-heading';
-      case 'ghost':
-        return 'text-primary';
-      case 'primary':
-        return 'text-white font-bold';
-      case 'secondary':
-      default:
-        return 'text-white font-semibold';
-    }
-  };
-
-  const getTextSize = () => {
-    switch (size) {
-      case 'sm':
-        return 'text-sm';
-      case 'lg':
-        return 'text-lg';
-      case 'md':
-      default:
-        return 'text-base';
-    }
-  };
-
   const isDisabled = disabled || loading;
+  const content = title ?? children;
 
   return (
     <Pressable
       onPress={onPress}
       disabled={isDisabled}
-      className={`flex-row items-center justify-center ${getSizeStyle()} ${getVariantStyle()} ${
-        isDisabled ? 'opacity-50' : ''
-      } ${className}`}
-      {...rest}
+      className={cn(
+        'flex-row items-center justify-center',
+        buttonSizes[size],
+        buttonVariants[variant],
+        isDisabled && 'opacity-50',
+        className
+      )}
+      {...props}
     >
       {loading ? (
         <ActivityIndicator
@@ -105,17 +92,25 @@ export default function AppButton({
       ) : (
         <>
           {leftIcon && <>{leftIcon}</>}
-          <Text
-            className={`font-outfit text-center ${getTextStyle()} ${getTextSize()} ${
-              leftIcon ? 'ml-2' : ''
-            } ${rightIcon ? 'mr-2' : ''} ${textClassName}`}
-          >
-            {title}
-          </Text>
+          {typeof content === 'string' ? (
+            <AppText
+              className={cn(
+                'text-center',
+                textSizes[size],
+                textVariants[variant],
+                leftIcon && 'ml-2',
+                rightIcon && 'mr-2',
+                textClassName
+              )}
+            >
+              {content}
+            </AppText>
+          ) : (
+            content
+          )}
           {rightIcon && <>{rightIcon}</>}
         </>
       )}
     </Pressable>
   );
 }
-

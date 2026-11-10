@@ -1,3 +1,6 @@
+const plugin = require('tailwindcss/plugin');
+
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
     './App.{js,jsx,ts,tsx}',
@@ -31,10 +34,30 @@ module.exports = {
         border: 'rgb(var(--color-border) / <alpha-value>)',
       },
       fontFamily: {
-        outfit: ['Outfit', 'outfit', 'sans-serif'],
+        outfit: ['Outfit', 'Outfit-Regular', 'sans-serif'],
       },
     },
   },
 
-  plugins: [],
+  plugins: [
+    plugin(function ({ addUtilities }) {
+      addUtilities({
+        '.font-normal': {
+          fontFamily: 'Outfit-Regular',
+        },
+        '.font-medium': {
+          fontFamily: 'Outfit-Medium',
+        },
+        '.font-semibold': {
+          fontFamily: 'Outfit-SemiBold',
+        },
+        '.font-bold': {
+          fontFamily: 'Outfit-Bold',
+        },
+        '.font-extrabold': {
+          fontFamily: 'Outfit-ExtraBold',
+        },
+      });
+    }),
+  ],
 };
