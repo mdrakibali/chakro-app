@@ -1,12 +1,6 @@
 import { Eye, EyeOff } from 'lucide-react-native';
 import React, { useState } from 'react';
-import {
-  Pressable,
-  Text,
-  TextInput,
-  TextInputProps,
-  View,
-} from 'react-native';
+import { Pressable, Text, TextInput, TextInputProps, View } from 'react-native';
 
 interface AppInputProps extends TextInputProps {
   label?: string;
@@ -54,14 +48,14 @@ export default function AppInput({
 
         {isPassword && (
           <Pressable
-            onPress={() => setShowPassword((prev) => !prev)}
+            onPress={() => setShowPassword(prev => !prev)}
             hitSlop={8}
             className="ml-2"
           >
             {showPassword ? (
-              <EyeOff size={20} color="#9CA3AF" />
+              <EyeOff size={20} className="text-[#9CA3AF]" />
             ) : (
-              <Eye size={20} color="#9CA3AF" />
+              <Eye size={20} className="text-[#9CA3AF]" />
             )}
           </Pressable>
         )}
@@ -73,4 +67,3 @@ export default function AppInput({
     </View>
   );
 }
-

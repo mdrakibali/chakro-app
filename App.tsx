@@ -7,9 +7,11 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import './global.css';
 import RootNavigator from './src/navigation/RootNavigator';
 import ThemeProvider from './src/theme/ThemeProvider';
+
+const queryClient = new QueryClient();
+
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
-  const queryClient = new QueryClient();
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
