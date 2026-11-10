@@ -1,8 +1,8 @@
-import './global.css';
 import { StatusBar, Text, useColorScheme, View } from 'react-native';
 import {
   SafeAreaProvider,
 } from 'react-native-safe-area-context';
+import './global.css';
 import ThemeProvider from './src/theme/ThemeProvider';
 
 function App() {
@@ -14,9 +14,12 @@ function App() {
         <StatusBar
           barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         />
-        <View className="flex-1 items-center justify-center bg-background">
-          <Text className="text-2xl font-bold text-heading">
+        <View className="flex-1 items-center justify-center bg-background px-6">
+          <Text className="text-3xl font-outfit text-heading">
             Hello CHAKRO!
+          </Text>
+          <Text className="mt-2 text-center text-base font-outfit text-muted">
+            Drive Anytime Your Perfect Ride
           </Text>
         </View>
       </ThemeProvider>
@@ -25,4 +28,3 @@ function App() {
 }
 
 export default App;
-
