@@ -10,3 +10,4 @@
     <font app:fontStyle="normal" app:fontWeight="800" app:font="@font/outfit_extrabold" />
     <font app:fontStyle="normal" app:fontWeight="900" app:font="@font/outfit_black" />
 </font-family>
+

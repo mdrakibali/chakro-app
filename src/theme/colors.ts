@@ -20,20 +20,21 @@ export const colors = {
   card: '#FFFFFF',
   cardDark: '#0E2331',
 
-  text: '#07151E',
+  text: '#111827',
   textDark: '#FFFFFF',
-  textSecondary: '#88AEC3',
-  textMuted: '#64748B',
+  textSecondary: '#6B7280',
+  textSecondaryDark: '#9CA3AF',
+  textMuted: '#9CA3AF',
 
-  border: '#E2E8F0',
-  borderDark: '#162E40',
+  border: '#E5E7EB',
+  borderDark: '#1F2937',
   divider: '#F1F5F9',
 
   // Semantic
   success: '#16A34A',
   warning: '#FECC32',
   error: '#FF765A',
-  info: '#88AEC3',
+  info: '#3B82F6',
 
   // Basic
   white: '#FFFFFF',
