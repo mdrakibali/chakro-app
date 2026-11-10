@@ -30,7 +30,7 @@ class SceneDelegate: RCTDefaultReactNativeFactoryDelegate, UIWindowSceneDelegate
     #endif
     
     reactNativeFactory?.startReactNative(
-      withModuleName: "KvRental",
+      withModuleName: "CHAKRO",
       in: window,
       connectionOptions: connectionOptions
     )

@@ -1,4 +1,4 @@
-package com.kvrental
+package com.CHAKRO
 
 import android.app.Application
 import com.facebook.react.PackageList
