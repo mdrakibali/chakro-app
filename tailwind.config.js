@@ -19,6 +19,18 @@ module.exports = {
         muted: 'rgb(var(--color-muted) / <alpha-value>)',
         border: 'rgb(var(--color-border) / <alpha-value>)',
       },
+      fontFamily: {
+        outfit: ['Outfit-Regular'],
+        'outfit-thin': ['Outfit-Thin'],
+        'outfit-extralight': ['Outfit-ExtraLight'],
+        'outfit-light': ['Outfit-Light'],
+        'outfit-regular': ['Outfit-Regular'],
+        'outfit-medium': ['Outfit-Medium'],
+        'outfit-semibold': ['Outfit-SemiBold'],
+        'outfit-bold': ['Outfit-Bold'],
+        'outfit-extrabold': ['Outfit-ExtraBold'],
+        'outfit-black': ['Outfit-Black'],
+      },
     },
   },
 
