@@ -1,4 +1,4 @@
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import { ChevronLeft } from 'lucide-react-native';
 import React, { useEffect, useRef, useState } from 'react';
 import {
@@ -25,9 +25,8 @@ export default function AuthLayout({
   scrollable = true,
   autoScrollOnKeyboard = true,
 }: AuthLayoutProps) {
-  const route = useRoute();
   const navigation = useNavigation();
-  const headerTitle = title ?? route.name;
+  const headerTitle = title ?? '';
   const scrollViewRef = useRef<React.ElementRef<typeof ScrollView>>(null);
   const [keyboardSpace, setKeyboardSpace] = useState<number>(0);
 

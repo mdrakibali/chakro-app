@@ -1,12 +1,13 @@
-import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { Image, Pressable, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { AppButton, AppText } from '../../components/common';
 import { ONBOARDING_SLIDES } from '../../constants/onboarding';
+import { RootStackScreenProps } from '../../types/navigation';
 
-export default function OnboardingScreen() {
-  const navigation = useNavigation();
+export default function OnboardingScreen({
+  navigation,
+}: RootStackScreenProps<'Onboarding'>) {
   const [activeSlide, setActiveSlide] = useState<number>(0);
 
   const currentSlide = ONBOARDING_SLIDES[activeSlide];

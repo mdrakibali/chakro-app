@@ -1,5 +1,3 @@
-import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Pressable, View } from 'react-native';
@@ -12,18 +10,16 @@ import {
   VerifyEmailFormData,
   verifyEmailSchema,
 } from '../../schemas';
-import { AuthStackParamList } from '../../types/navigation';
+import { AuthStackScreenProps } from '../../types/navigation';
 import { zodResolver } from '../../utils';
 import AuthLayout from './AuthLayout';
 
-type VerifyEmailRouteProp = RouteProp<AuthStackParamList, 'VerifyEmail'>;
-
 const RESEND_INTERVAL_SECONDS = 60;
 
-export default function VerifyEmailScreen() {
-  const navigation =
-    useNavigation<NativeStackNavigationProp<AuthStackParamList>>();
-  const route = useRoute<VerifyEmailRouteProp>();
+export default function VerifyEmailScreen({
+  navigation,
+  route,
+}: AuthStackScreenProps<'VerifyEmail'>) {
   const email = route.params?.email || '';
 
   const [timer, setTimer] = useState(RESEND_INTERVAL_SECONDS);

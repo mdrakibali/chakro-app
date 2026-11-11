@@ -1,18 +1,16 @@
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Check, Lock, Mail, User } from 'lucide-react-native';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Pressable, Text, View } from 'react-native';
 import { AppButton, AppFormInput, AppText } from '../../components';
 import { SignupFormData, signupSchema } from '../../schemas';
-import { AuthStackParamList } from '../../types/navigation';
+import { AuthStackScreenProps } from '../../types/navigation';
 import { zodResolver } from '../../utils';
 import AuthLayout from './AuthLayout';
 
-export default function SignUpScreen() {
-  const navigation =
-    useNavigation<NativeStackNavigationProp<AuthStackParamList>>();
+export default function SignUpScreen({
+  navigation,
+}: AuthStackScreenProps<'SignUp'>) {
   const [agreed, setAgreed] = useState<boolean>(false);
 
   const {

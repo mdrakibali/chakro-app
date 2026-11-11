@@ -22,7 +22,7 @@ export interface AppButtonProps extends Omit<PressableProps, 'onPress'> {
 const buttonVariants: Record<ButtonVariant, string> = {
   primary: 'bg-primary active:opacity-90',
   secondary: 'bg-secondary active:opacity-80',
-  outline: 'border border-border bg-transparent active:bg-surface/50',
+  outline: 'border border-primary bg-transparent',
   ghost: 'bg-transparent active:bg-surface/30',
 };
 
