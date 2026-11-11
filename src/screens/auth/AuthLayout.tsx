@@ -19,10 +19,6 @@ export interface AuthLayoutProps {
   autoScrollOnKeyboard?: boolean;
 }
 
-/**
- * Common layout for authentication screens.
- * Features fixed top header, KeyboardAvoidingView, and auto-scrolling form container when keyboard opens.
- */
 export default function AuthLayout({
   children,
   title,
@@ -39,7 +35,7 @@ export default function AuthLayout({
     if (navigation.canGoBack()) {
       navigation.goBack();
     } else {
-      navigation.navigate('Welcome');
+      navigation.getParent()?.goBack();
     }
   };
 

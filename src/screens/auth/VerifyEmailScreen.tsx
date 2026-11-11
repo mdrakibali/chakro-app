@@ -1,4 +1,5 @@
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Pressable, View } from 'react-native';
@@ -20,7 +21,8 @@ type VerifyEmailRouteProp = RouteProp<AuthStackParamList, 'VerifyEmail'>;
 const RESEND_INTERVAL_SECONDS = 60;
 
 export default function VerifyEmailScreen() {
-  const navigation = useNavigation();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<AuthStackParamList>>();
   const route = useRoute<VerifyEmailRouteProp>();
   const email = route.params?.email || '';
 
@@ -77,9 +79,7 @@ export default function VerifyEmailScreen() {
   const onSubmit = (data: VerifyEmailFormData) => {
     console.log('Verify Email Payload:', data);
     // On success, navigate to SignIn
-    navigation.navigate('Auth', {
-      screen: 'SignIn',
-    });
+    navigation.navigate('SignIn');
   };
 
   const formattedTimer = `00:${timer < 10 ? `0${timer}` : timer}`;
@@ -143,7 +143,7 @@ export default function VerifyEmailScreen() {
           Already verified?{' '}
         </AppText>
         <Pressable
-          onPress={() => navigation.navigate('Auth', { screen: 'SignIn' })}
+          onPress={() => navigation.navigate('SignIn')}
           hitSlop={8}
         >
           <AppText className="text-sm font-bold text-primary">Sign In</AppText>
@@ -152,4 +152,3 @@ export default function VerifyEmailScreen() {
     </AuthLayout>
   );
 }
-

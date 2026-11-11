@@ -1,4 +1,5 @@
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Lock } from 'lucide-react-native';
 import React from 'react';
 import { useForm } from 'react-hook-form';
@@ -19,7 +20,8 @@ import AuthLayout from './AuthLayout';
 type ResetPasswordRouteProp = RouteProp<AuthStackParamList, 'ResetPassword'>;
 
 export default function ResetPasswordScreen() {
-  const navigation = useNavigation();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<AuthStackParamList>>();
   const route = useRoute<ResetPasswordRouteProp>();
   const email = route.params?.email || '';
   const resetToken = route.params?.resetToken;
@@ -44,9 +46,7 @@ export default function ResetPasswordScreen() {
     });
 
     // Navigate to Sign In after successful password reset
-    navigation.navigate('Auth', {
-      screen: 'SignIn',
-    });
+    navigation.navigate('SignIn');
   };
 
   return (
@@ -96,7 +96,7 @@ export default function ResetPasswordScreen() {
           Remember your password?{' '}
         </AppText>
         <Pressable
-          onPress={() => navigation.navigate('Auth', { screen: 'SignIn' })}
+          onPress={() => navigation.navigate('SignIn')}
           hitSlop={8}
         >
           <AppText className="text-sm font-bold text-primary">Sign In</AppText>
@@ -105,4 +105,3 @@ export default function ResetPasswordScreen() {
     </AuthLayout>
   );
 }
-

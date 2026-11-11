@@ -1,4 +1,5 @@
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Pressable, View } from 'react-native';
@@ -23,7 +24,8 @@ type VerifyForgotPasswordRouteProp = RouteProp<
 const RESEND_INTERVAL_SECONDS = 60;
 
 export default function VerifyForgotPasswordScreen() {
-  const navigation = useNavigation();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<AuthStackParamList>>();
   const route = useRoute<VerifyForgotPasswordRouteProp>();
   const email = route.params?.email || '';
 
@@ -79,12 +81,9 @@ export default function VerifyForgotPasswordScreen() {
 
   const onSubmit = (data: VerifyForgotPasswordFormData) => {
     console.log('Verify Forgot Password Payload:', data);
-    navigation.navigate('Auth', {
-      screen: 'ResetPassword',
-      params: {
-        email: data.email,
-        resetToken: data.otp,
-      },
+    navigation.navigate('ResetPassword', {
+      email: data.email,
+      resetToken: data.otp,
     });
   };
 
@@ -145,4 +144,3 @@ export default function VerifyForgotPasswordScreen() {
     </AuthLayout>
   );
 }
-

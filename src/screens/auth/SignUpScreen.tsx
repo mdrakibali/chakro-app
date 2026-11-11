@@ -1,15 +1,18 @@
 import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Check, Lock, Mail, User } from 'lucide-react-native';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Pressable, Text, View } from 'react-native';
 import { AppButton, AppFormInput, AppText } from '../../components';
 import { SignupFormData, signupSchema } from '../../schemas';
+import { AuthStackParamList } from '../../types/navigation';
 import { zodResolver } from '../../utils';
 import AuthLayout from './AuthLayout';
 
 export default function SignUpScreen() {
-  const navigation = useNavigation();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<AuthStackParamList>>();
   const [agreed, setAgreed] = useState<boolean>(false);
 
   const {
@@ -27,10 +30,7 @@ export default function SignUpScreen() {
 
   const onSubmit = (data: SignupFormData) => {
     console.log('Sign Up Payload:', data);
-    navigation.navigate('Auth', {
-      screen: 'VerifyEmail',
-      params: { email: data.email },
-    });
+    navigation.navigate('VerifyEmail', { email: data.email });
   };
 
   return (
@@ -112,7 +112,7 @@ export default function SignUpScreen() {
           Already have an account?{' '}
         </AppText>
         <Pressable
-          onPress={() => navigation.navigate('Auth', { screen: 'SignIn' })}
+          onPress={() => navigation.navigate('SignIn')}
           hitSlop={8}
         >
           <AppText className="text-sm font-bold text-primary">Sign In</AppText>
