@@ -11,7 +11,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Brand & Reference Palette
+        // Brand Palette
         primary: {
           DEFAULT: '#F07828',
           dark: '#D9651D',
@@ -21,11 +21,13 @@ module.exports = {
           DEFAULT: '#07151E',
           surface: '#0E2331',
         },
+
+        // Accents
         'accent-blue': '#88AEC3',
         'accent-coral': '#FF765A',
         'accent-yellow': '#FECC32',
 
-        // Dynamic theme variables (light/dark)
+        // Theme variables (Light Mode)
         background: 'rgb(var(--color-background) / <alpha-value>)',
         surface: 'rgb(var(--color-surface) / <alpha-value>)',
         heading: 'rgb(var(--color-heading) / <alpha-value>)',

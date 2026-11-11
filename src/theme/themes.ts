@@ -1,22 +1,13 @@
-
 import { vars } from 'nativewind';
 
 export const themes = {
+  // Light Mode (Primary theme for CHAKRO)
   light: vars({
-    '--color-background': '241 240 237',
-    '--color-surface': '255 255 255',
-    '--color-heading': '32 37 43',
-    '--color-foreground': '65 70 77',
-    '--color-muted': '115 115 115',
-    '--color-border': '226 225 222',
-  }),
-
-  dark: vars({
-    '--color-background': '23 28 34',
-    '--color-surface': '34 42 51',
-    '--color-heading': '255 255 255',
-    '--color-foreground': '229 231 235',
-    '--color-muted': '161 170 180',
-    '--color-border': '52 61 71',
+    '--color-background': '244 247 249', // #F4F7F9 (Crisp clean light background)
+    '--color-surface': '255 255 255', // #FFFFFF (Card / Sheet surface)
+    '--color-heading': '17 24 39', // #111827 (Dark neutral heading)
+    '--color-foreground': '55 65 81', // #374151 (Body text)
+    '--color-muted': '107 114 128', // #6B7280 (Muted / secondary text)
+    '--color-border': '229 231 235', // #E5E7EB (Border / divider)
   }),
 };

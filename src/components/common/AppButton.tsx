@@ -52,7 +52,7 @@ const textSizes: Record<ButtonSize, string> = {
 
 /**
  * Button component following shadcn variant patterns for React Native.
- * Uses children directly instead of a title prop.
+ * Styled purely with Tailwind classes.
  */
 export default function AppButton({
   variant = 'primary',

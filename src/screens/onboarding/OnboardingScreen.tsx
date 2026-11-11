@@ -1,4 +1,3 @@
-import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
 import { Image, Pressable, View } from 'react-native';
@@ -7,13 +6,11 @@ import { AppButton, AppText } from '../../components/common';
 import { ONBOARDING_SLIDES } from '../../constants/onboarding';
 import { RootStackParamList } from '../../types/navigation';
 
-type NavigationProp = NativeStackNavigationProp<
-  RootStackParamList,
-  'Onboarding'
->;
-
-export default function OnboardingScreen() {
-  const navigation = useNavigation<NavigationProp>();
+export default function OnboardingScreen({
+  navigation,
+}: {
+  navigation: NativeStackNavigationProp<RootStackParamList, 'Onboarding'>;
+}) {
   const [activeSlide, setActiveSlide] = useState<number>(0);
 
   const currentSlide = ONBOARDING_SLIDES[activeSlide];
@@ -41,7 +38,7 @@ export default function OnboardingScreen() {
       />
 
       {/* Layered Dark Backdrop Overlays for High Contrast */}
-      <View className="absolute inset-0 bg-black/20" />
+      <View className="absolute inset-0 bg-black/50" />
 
       <SafeAreaView className="flex-1 justify-between">
         {/* Top Header with Skip Button */}
@@ -90,11 +87,7 @@ export default function OnboardingScreen() {
           </View>
 
           {/* Primary Action Button */}
-          <AppButton
-            onPress={handleNext}
-            size="lg"
-            className="mt-8 w-full"
-          >
+          <AppButton onPress={handleNext} size="lg" className="mt-8 w-full">
             {isLastSlide ? 'Get Started' : 'Next'}
           </AppButton>
         </View>
