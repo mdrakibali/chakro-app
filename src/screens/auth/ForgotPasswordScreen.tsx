@@ -24,7 +24,10 @@ export default function ForgotPasswordScreen() {
 
   const onSubmit = (data: ForgotPasswordFormData) => {
     console.log('Forgot Password Payload:', data);
-    navigation.navigate('VerifyForgotPassword', { email: data.email });
+    navigation.navigate('Auth', {
+      screen: 'VerifyForgotPassword',
+      params: { email: data.email },
+    });
   };
 
   return (

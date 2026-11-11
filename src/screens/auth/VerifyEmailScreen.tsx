@@ -77,7 +77,9 @@ export default function VerifyEmailScreen() {
   const onSubmit = (data: VerifyEmailFormData) => {
     console.log('Verify Email Payload:', data);
     // On success, navigate to SignIn
-    navigation.navigate('SignIn');
+    navigation.navigate('Auth', {
+      screen: 'SignIn',
+    });
   };
 
   const formattedTimer = `00:${timer < 10 ? `0${timer}` : timer}`;

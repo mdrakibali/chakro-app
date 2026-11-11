@@ -44,7 +44,9 @@ export default function ResetPasswordScreen() {
     });
 
     // Navigate to Sign In after successful password reset
-    navigation.navigate('SignIn');
+    navigation.navigate('Auth', {
+      screen: 'SignIn',
+    });
   };
 
   return (
@@ -94,7 +96,7 @@ export default function ResetPasswordScreen() {
           Remember your password?{' '}
         </AppText>
         <Pressable
-          onPress={() => navigation.navigate('SignIn')}
+          onPress={() => navigation.navigate('Auth', { screen: 'SignIn' })}
           hitSlop={8}
         >
           <AppText className="text-sm font-bold text-primary">Sign In</AppText>
