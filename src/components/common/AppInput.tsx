@@ -1,6 +1,12 @@
 import { Eye, EyeOff } from 'lucide-react-native';
-import React, { useState } from 'react';
-import { Pressable, TextInput, TextInputProps, View } from 'react-native';
+import React, { cloneElement, isValidElement, useState } from 'react';
+import {
+  ColorValue,
+  Pressable,
+  TextInput,
+  TextInputProps,
+  View,
+} from 'react-native';
 import { cn } from '../../utils';
 import AppText from './AppText';
 
@@ -13,9 +19,6 @@ export interface AppInputProps extends TextInputProps {
   inputClassName?: string;
 }
 
-/**
- * Text input component following shadcn patterns with built-in password toggle and error states.
- */
 export default function AppInput({
   label,
   error,
@@ -23,10 +26,23 @@ export default function AppInput({
   leftIcon,
   containerClassName,
   inputClassName,
-  placeholderTextColor = '#585858',
+  placeholderTextColor = '#9CA3AF',
   ...rest
 }: AppInputProps) {
   const [showPassword, setShowPassword] = useState(!isPassword);
+
+  const renderLeftIcon = () => {
+    if (!leftIcon) return null;
+
+    if (isValidElement<{ color?: ColorValue; size?: number }>(leftIcon)) {
+      return cloneElement(leftIcon, {
+        color: leftIcon.props.color ?? placeholderTextColor,
+        size: leftIcon.props.size ?? 24,
+      });
+    }
+
+    return leftIcon;
+  };
 
   return (
     <View className={cn('w-full', containerClassName)}>
@@ -42,7 +58,7 @@ export default function AppInput({
           error ? 'border-red-500' : 'border-surface',
         )}
       >
-        {leftIcon && <View className="mr-2">{leftIcon}</View>}
+        {leftIcon && <View className="mr-2">{renderLeftIcon()}</View>}
 
         <TextInput
           className={cn(
@@ -62,16 +78,16 @@ export default function AppInput({
             className="ml-2"
           >
             {showPassword ? (
-              <EyeOff size={24} color="#9CA3AF" />
+              <EyeOff size={24} color={placeholderTextColor as string} />
             ) : (
-              <Eye size={24} color="#9CA3AF" />
+              <Eye size={24} color={placeholderTextColor as string} />
             )}
           </Pressable>
         )}
       </View>
 
       {error && (
-        <AppText className="mt-1 text-xs text-red-500">{error}</AppText>
+        <AppText className="mt-1 text-sm text-red-500">{error}</AppText>
       )}
     </View>
   );

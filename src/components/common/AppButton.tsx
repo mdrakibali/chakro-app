@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  ActivityIndicator,
-  Pressable,
-  PressableProps,
-} from 'react-native';
+import { ActivityIndicator, Pressable, PressableProps } from 'react-native';
 import { cn } from '../../utils';
 import AppText from './AppText';
 
@@ -30,10 +26,10 @@ const buttonVariants: Record<ButtonVariant, string> = {
 };
 
 const buttonSizes: Record<ButtonSize, string> = {
-  sm: 'py-2 px-4 rounded-xl',
-  default: 'py-3.5 px-6 rounded-2xl',
-  md: 'py-3.5 px-6 rounded-2xl',
-  lg: 'py-4 px-8 rounded-2xl',
+  sm: 'py-2 px-4 rounded-lg',
+  default: 'py-3 px-6 rounded-lg',
+  md: 'py-3.5 px-6 rounded-lg',
+  lg: 'py-4 px-8 rounded-lg',
 };
 
 const textVariants: Record<ButtonVariant, string> = {
@@ -78,14 +74,16 @@ export default function AppButton({
         buttonSizes[size],
         buttonVariants[variant],
         isDisabled && 'opacity-50',
-        className
+        className,
       )}
       {...props}
     >
       {loading ? (
         <ActivityIndicator
           size="small"
-          color={variant === 'outline' || variant === 'ghost' ? '#F07828' : '#FFFFFF'}
+          color={
+            variant === 'outline' || variant === 'ghost' ? '#F07828' : '#FFFFFF'
+          }
         />
       ) : (
         <>
@@ -98,7 +96,7 @@ export default function AppButton({
                 textVariants[variant],
                 leftIcon && 'ml-2',
                 rightIcon && 'mr-2',
-                textClassName
+                textClassName,
               )}
             >
               {children}

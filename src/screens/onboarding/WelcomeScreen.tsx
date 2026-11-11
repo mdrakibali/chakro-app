@@ -13,7 +13,7 @@ export default function WelcomeScreen() {
   };
 
   const handleSignUp = () => {
-    navigation.navigate('Auth', { screen: 'Signup' });
+    navigation.navigate('Auth', { screen: 'SignUp' });
   };
 
   return (
