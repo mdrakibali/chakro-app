@@ -27,6 +27,11 @@ export const signupSchema = z
     path: ['confirmPassword'],
   });
 
+export const verifyEmailSchema = z.object({
+  email: z.string().min(1, 'Email is required').email('Please enter a valid email address'),
+  otp: z.string().min(1, 'One-Time Password is required').max(6, 'One-Time Password must be 6 digits long'),
+});
+
 export const forgotPasswordSchema = z.object({
   email: z
     .string()
@@ -34,7 +39,31 @@ export const forgotPasswordSchema = z.object({
     .email('Please enter a valid email address'),
 });
 
+export const verifyForgotPasswordSchema = z.object({
+  email: z.string().min(1, 'Email is required').email('Please enter a valid email address'),
+  otp: z.string().min(1, 'One-Time Password is required').max(6, 'One-Time Password must be 6 digits long'),
+});
+export const resetPasswordSchema = z.object({
+  password: z.string().min(6, 'Password must be at least 6 characters long'),
+  confirmPassword: z.string().min(1, 'Please confirm your password'),
+  resetToken: z.string().min(1, 'Reset Token is required'),
+});
+
+export const logoutSchema = z.object({
+  refreshToken: z.string().min(1, 'Refresh Token is required'),
+});
+
+export const refreshAccessTokenSchema = z.object({
+  refreshToken: z.string().min(1, 'Refresh Token is required'),
+});
+
+
 export type SignInFormData = z.infer<typeof signInSchema>;
 export type SignupFormData = z.infer<typeof signupSchema>;
+export type VerifyEmailFormData = z.infer<typeof verifyEmailSchema>;
 export type ForgotPasswordFormData = z.infer<typeof forgotPasswordSchema>;
+export type VerifyForgotPasswordFormData = z.infer<typeof verifyForgotPasswordSchema>;
+export type ResetPasswordFormData = z.infer<typeof resetPasswordSchema>;
+export type LogoutFormData = z.infer<typeof logoutSchema>;
+export type RefreshAccessTokenFormData = z.infer<typeof refreshAccessTokenSchema>;
 

@@ -12,13 +12,13 @@ export const typography = {
   },
 
   fontSize: {
-    xs: 12,
-    sm: 14,
-    base: 16,
-    lg: 18,
-    xl: 20,
-    '2xl': 24,
-    '3xl': 28,
-    '4xl': 32,
+    xs: 13,
+    sm: 15,
+    base: 17,
+    lg: 19,
+    xl: 22,
+    '2xl': 26,
+    '3xl': 32,
+    '4xl': 38,
   },
 };

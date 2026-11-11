@@ -33,7 +33,7 @@ const buttonSizes: Record<ButtonSize, string> = {
 };
 
 const textVariants: Record<ButtonVariant, string> = {
-  primary: 'text-white font-bold',
+  primary: 'text-white font-semibold',
   secondary: 'text-white font-semibold',
   outline: 'text-heading font-medium',
   ghost: 'text-primary font-medium',
