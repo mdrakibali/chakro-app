@@ -1,30 +1,22 @@
-import { NavigatorScreenParams } from "@react-navigation/native";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
-
-
+import { NavigatorScreenParams } from '@react-navigation/native';
 
 export type AuthStackParamList = {
-    SignIn: undefined;
-    Signup: undefined;
-    VerifyEmail:undefined;
-    ForgotPassword:undefined;
-    VerifyForgotPassword:undefined;
-    ResetPassword: undefined;
-}
+  SignIn: undefined;
+  Signup: undefined;
+  VerifyEmail: undefined;
+  ForgotPassword: undefined;
+  VerifyForgotPassword: undefined;
+  ResetPassword: undefined;
+};
+
 export type RootStackParamList = {
-    Onboarding: undefined;
-    Welcome: undefined;
-    Auth: NavigatorScreenParams<AuthStackParamList>;
-}
-
-export type RootStackScreenProps<T extends keyof RootStackParamList> = NativeStackScreenProps<RootStackParamList, T>;
-
-export type AuthStackScreenProps<T extends keyof AuthStackParamList> = NativeStackScreenProps<AuthStackParamList, T>;
-
+  Onboarding: undefined;
+  Welcome: undefined;
+  Auth: NavigatorScreenParams<AuthStackParamList>;
+};
 
 declare global {
-    namespace ReactNavigation {
-        interface RootParamList extends RootStackParamList { }
-        interface AuthParamList extends AuthStackParamList { }
-    }
+  namespace ReactNavigation {
+    interface RootParamList extends RootStackParamList {}
+  }
 }

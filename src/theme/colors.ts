@@ -7,19 +7,21 @@ export const colors = {
   secondary: '#07151E',
   secondarySurface: '#0E2331',
 
-  // Accent Colors
+  // Accents
   accentBlue: '#88AEC3',
   accentCoral: '#FF765A',
   accentYellow: '#FECC32',
 
-  // Light Mode Colors
+  // Light Theme
   background: '#F4F7F9',
   surface: '#FFFFFF',
   card: '#FFFFFF',
 
+  heading: '#111827',
+  foreground: '#374151',
   text: '#111827',
   textSecondary: '#6B7280',
-  textMuted: '#9CA3AF',
+  muted: '#6B7280',
 
   border: '#E5E7EB',
   divider: '#F1F5F9',

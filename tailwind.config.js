@@ -27,13 +27,14 @@ module.exports = {
         'accent-coral': '#FF765A',
         'accent-yellow': '#FECC32',
 
-        // Theme variables (Light Mode)
-        background: 'rgb(var(--color-background) / <alpha-value>)',
-        surface: 'rgb(var(--color-surface) / <alpha-value>)',
-        heading: 'rgb(var(--color-heading) / <alpha-value>)',
-        foreground: 'rgb(var(--color-foreground) / <alpha-value>)',
-        muted: 'rgb(var(--color-muted) / <alpha-value>)',
-        border: 'rgb(var(--color-border) / <alpha-value>)',
+        // Light Theme
+        background: '#F4F7F9',
+        surface: '#FFFFFF',
+        card: '#FFFFFF',
+        heading: '#111827',
+        foreground: '#374151',
+        muted: '#6B7280',
+        border: '#E5E7EB',
       },
       fontFamily: {
         outfit: ['Outfit', 'Outfit-Regular', 'sans-serif'],
