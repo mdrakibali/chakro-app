@@ -6,7 +6,8 @@ import AppText from './AppText';
 export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost';
 export type ButtonSize = 'sm' | 'default' | 'md' | 'lg';
 
-export interface AppButtonProps extends PressableProps {
+export interface AppButtonProps extends Omit<PressableProps, 'onPress'> {
+  onPress?: ((event?: any) => unknown) | undefined;
   variant?: ButtonVariant;
   size?: ButtonSize;
   loading?: boolean;
@@ -25,11 +26,12 @@ const buttonVariants: Record<ButtonVariant, string> = {
   ghost: 'bg-transparent active:bg-surface/30',
 };
 
+// Fixed heights prevent height jitter and flickering during loading state transitions
 const buttonSizes: Record<ButtonSize, string> = {
-  sm: 'py-2 px-4 rounded-lg',
-  default: 'py-3 px-6 rounded-lg',
-  md: 'py-3.5 px-6 rounded-lg',
-  lg: 'py-4 px-8 rounded-lg',
+  sm: 'h-10 px-4 rounded-lg',
+  default: 'h-12 px-6 rounded-lg',
+  md: 'h-12 px-6 rounded-lg',
+  lg: 'h-14 px-8 rounded-lg',
 };
 
 const textVariants: Record<ButtonVariant, string> = {
@@ -48,7 +50,7 @@ const textSizes: Record<ButtonSize, string> = {
 
 /**
  * Button component following shadcn variant patterns for React Native.
- * Styled purely with Tailwind classes.
+ * Compatible with react-hook-form handleSubmit and standard Pressable events.
  */
 export default function AppButton({
   variant = 'primary',
@@ -70,10 +72,10 @@ export default function AppButton({
       onPress={onPress}
       disabled={isDisabled}
       className={cn(
-        'flex-row items-center justify-center',
+        'relative flex-row items-center justify-center',
         buttonSizes[size],
         buttonVariants[variant],
-        isDisabled && 'opacity-50',
+        isDisabled && 'opacity-70',
         className,
       )}
       {...props}

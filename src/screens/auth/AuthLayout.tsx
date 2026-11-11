@@ -1,19 +1,39 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { ChevronLeft } from 'lucide-react-native';
-import React from 'react';
-import { KeyboardAvoidingView, Platform, Pressable, View } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import {
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  Pressable,
+  ScrollView,
+  View,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { AppText } from '../../components/common';
 
 export interface AuthLayoutProps {
   children: React.ReactNode;
   title?: string;
+  scrollable?: boolean;
+  autoScrollOnKeyboard?: boolean;
 }
 
-export default function AuthLayout({ children, title }: AuthLayoutProps) {
+/**
+ * Common layout for authentication screens.
+ * Features fixed top header, KeyboardAvoidingView, and auto-scrolling form container when keyboard opens.
+ */
+export default function AuthLayout({
+  children,
+  title,
+  scrollable = true,
+  autoScrollOnKeyboard = true,
+}: AuthLayoutProps) {
   const route = useRoute();
   const navigation = useNavigation();
   const headerTitle = title ?? route.name;
+  const scrollViewRef = useRef<React.ElementRef<typeof ScrollView>>(null);
+  const [keyboardSpace, setKeyboardSpace] = useState<number>(0);
 
   const handleBack = () => {
     if (navigation.canGoBack()) {
@@ -23,14 +43,40 @@ export default function AuthLayout({ children, title }: AuthLayoutProps) {
     }
   };
 
+  useEffect(() => {
+    if (!autoScrollOnKeyboard || !scrollable) return;
+
+    const showEvent =
+      Platform.OS === 'ios' ? 'keyboardWillShow' : 'keyboardDidShow';
+    const hideEvent =
+      Platform.OS === 'ios' ? 'keyboardWillHide' : 'keyboardDidHide';
+
+    const showSub = Keyboard.addListener(showEvent, e => {
+      const height = Platform.OS === 'ios' ? e.endCoordinates.height : 30;
+      setKeyboardSpace(height);
+      setTimeout(() => {
+        scrollViewRef.current?.scrollToEnd({ animated: true });
+      }, 100);
+    });
+
+    const hideSub = Keyboard.addListener(hideEvent, () => {
+      setKeyboardSpace(0);
+    });
+
+    return () => {
+      showSub.remove();
+      hideSub.remove();
+    };
+  }, [autoScrollOnKeyboard, scrollable]);
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       className="flex-1 bg-background"
     >
-      <SafeAreaView className="flex-1 px-6 pt-2 pb-6">
-        {/* Top Header */}
-        <View className="flex-row items-center justify-between mb-8">
+      <SafeAreaView className="flex-1">
+        {/* Fixed Top Header */}
+        <View className="flex-row items-center justify-between px-6 pt-2 mb-4">
           <Pressable
             className="h-10 w-10 items-center justify-center rounded-full border border-border bg-surface active:opacity-70"
             onPress={handleBack}
@@ -42,9 +88,29 @@ export default function AuthLayout({ children, title }: AuthLayoutProps) {
           <AppText className="text-xl font-bold text-heading">
             {headerTitle}
           </AppText>
+
+          {/* Spacer to keep title centered */}
+          <View className="h-10 w-10" />
         </View>
-        {/* Content */}
-        <View className="flex-1">{children}</View>
+
+        {/* Scrollable Form Content */}
+        {scrollable ? (
+          <ScrollView
+            ref={scrollViewRef}
+            className="flex-1 px-6"
+            // eslint-disable-next-line react-native/no-inline-styles
+            contentContainerStyle={{
+              flexGrow: 1,
+              paddingBottom: 24 + keyboardSpace,
+            }}
+            keyboardShouldPersistTaps="handled"
+            showsVerticalScrollIndicator={false}
+          >
+            {children}
+          </ScrollView>
+        ) : (
+          <View className="flex-1 px-6">{children}</View>
+        )}
       </SafeAreaView>
     </KeyboardAvoidingView>
   );

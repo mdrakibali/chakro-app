@@ -75,7 +75,7 @@ export default function SignInScreen() {
 
       {/* Submit Button */}
       <AppButton
-        onPress={() => handleSubmit(onSubmit)()}
+        onPress={handleSubmit(onSubmit)}
         loading={isSubmitting}
         size="lg"
         className="mt-6 w-full"
