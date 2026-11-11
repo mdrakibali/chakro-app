@@ -90,7 +90,8 @@ export default function SignUpScreen() {
               {agreed && <Check size={14} color="#ffffff" strokeWidth={3} />}
             </View>
             <Text className="text-gray-600 text-sm font-medium">
-              I agree to terms & conditions
+              By creating an account, I accept the Terms & Conditions & Privacy
+              Policy.
             </Text>
           </Pressable>
         </View>
@@ -111,10 +112,7 @@ export default function SignUpScreen() {
         <AppText className="text-sm font-normal text-muted">
           Already have an account?{' '}
         </AppText>
-        <Pressable
-          onPress={() => navigation.navigate('SignIn')}
-          hitSlop={8}
-        >
+        <Pressable onPress={() => navigation.navigate('SignIn')} hitSlop={8}>
           <AppText className="text-sm font-bold text-primary">Sign In</AppText>
         </Pressable>
       </View>
