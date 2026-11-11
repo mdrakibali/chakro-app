@@ -79,12 +79,9 @@ export default function VerifyForgotPasswordScreen() {
 
   const onSubmit = (data: VerifyForgotPasswordFormData) => {
     console.log('Verify Forgot Password Payload:', data);
-    navigation.navigate('Auth', {
-      screen: 'ResetPassword',
-      params: {
-        email: data.email,
-        resetToken: data.otp,
-      },
+    navigation.navigate('ResetPassword', {
+      email: data.email,
+      resetToken: data.otp,
     });
   };
 
