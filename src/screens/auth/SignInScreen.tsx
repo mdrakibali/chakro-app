@@ -1,20 +1,13 @@
-import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { Pressable, Text, View } from 'react-native';
+import { AppText } from '../../components/common';
+import AuthLayout from './AuthLayout';
 
 export default function SignInScreen() {
-  const navigation = useNavigation();
-  const handleBack = () => {
-    navigation.navigate('Onboarding');
-  };
   return (
-    <View className="w-full h-full bg-background flex-1 items-center justify-center">
-      <Text className="text-text text-xl font-bold">
+    <AuthLayout title="Sign In">
+      <AppText className="text-xl font-bold text-heading">
         This is SIGN IN SCREEN
-      </Text>
-      <Pressable onPress={handleBack}>
-        <Text className="text-text text-xl font-bold">Back</Text>
-      </Pressable>
-    </View>
+      </AppText>
+    </AuthLayout>
   );
 }
