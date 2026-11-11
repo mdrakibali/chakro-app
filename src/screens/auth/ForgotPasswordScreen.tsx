@@ -4,7 +4,10 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { View } from 'react-native';
 import { AppButton, AppFormInput, AppText } from '../../components/common';
-import { ForgotPasswordFormData, forgotPasswordSchema } from '../../schemas';
+import {
+  ForgotPasswordFormData,
+  forgotPasswordSchema,
+} from '../../schemas';
 import { zodResolver } from '../../utils';
 import AuthLayout from './AuthLayout';
 
@@ -25,10 +28,8 @@ export default function ForgotPasswordScreen() {
   const onSubmit = (data: ForgotPasswordFormData) => {
     console.log('Forgot Password Payload:', data);
     navigation.navigate('Auth', {
-      screen: 'VerifyEmail',
-      params: {
-        email: data.email,
-      },
+      screen: 'VerifyForgotPassword',
+      params: { email: data.email },
     });
   };
 
@@ -37,11 +38,11 @@ export default function ForgotPasswordScreen() {
       {/* Title & Description */}
       <View className="w-full gap-2 pb-6">
         <AppText className="text-2xl font-bold text-heading">
-          Forgot Password
+          Reset Your Password
         </AppText>
         <AppText className="text-base font-normal text-muted">
-          Enter your registered email address. We will send you instructions to
-          reset your password.
+          Enter your registered email address and we will send you a
+          verification code to reset your password.
         </AppText>
       </View>
 
@@ -64,7 +65,7 @@ export default function ForgotPasswordScreen() {
         size="lg"
         className="mt-6 w-full"
       >
-        Send OTP
+        Send Verification Code
       </AppButton>
     </AuthLayout>
   );
