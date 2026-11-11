@@ -28,13 +28,13 @@ export default function OnboardingScreen() {
     <View className="w-full h-full flex-1">
       {/* Background Car Image */}
       <Image
-        source={require('../../assets/images/cars/car.jpg')}
+        source={require('../../assets/images/cars/onboarding.png')}
         className="absolute inset-0 h-full w-full"
         resizeMode="cover"
       />
 
       {/* Layered Dark Backdrop Overlays for High Contrast */}
-      <View className="absolute inset-0 bg-black/20" />
+      <View className="absolute inset-0 bg-black/40" />
 
       <SafeAreaView className="flex-1 justify-between">
         {/* Top Header with Skip Button */}
@@ -58,7 +58,7 @@ export default function OnboardingScreen() {
           </AppText>
 
           {/* Subtitle */}
-          <AppText className="mt-3 text-lg leading-6 text-white/70">
+          <AppText className="mt-3 text-lg leading-6 text-white/80">
             {currentSlide.subtitle}
           </AppText>
 
