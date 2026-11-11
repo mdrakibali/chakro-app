@@ -15,18 +15,10 @@ export interface AppFormOtpInputProps<
   control: Control<TFieldValues>;
 }
 
-/**
- * Form-bound OTP input component for react-hook-form.
- * Automatically connects value, onChange, and validation error messages.
- */
 export default function AppFormOtpInput<
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
->({
-  name,
-  control,
-  ...props
-}: AppFormOtpInputProps<TFieldValues, TName>) {
+>({ name, control, ...props }: AppFormOtpInputProps<TFieldValues, TName>) {
   const {
     field: { value, onChange },
     fieldState: { error },
@@ -44,4 +36,3 @@ export default function AppFormOtpInput<
     />
   );
 }
-

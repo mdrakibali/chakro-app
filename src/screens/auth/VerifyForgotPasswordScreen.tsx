@@ -1,3 +1,4 @@
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Pressable, View } from 'react-native';
@@ -10,17 +11,16 @@ import {
   VerifyForgotPasswordFormData,
   verifyForgotPasswordSchema,
 } from '../../schemas';
-import { AuthStackScreenProps } from '../../types/navigation';
+import { AuthStackParamList } from '../../types/navigation';
 import { zodResolver } from '../../utils';
 import AuthLayout from './AuthLayout';
 
 const RESEND_INTERVAL_SECONDS = 60;
 
-export default function VerifyForgotPasswordScreen({
-  navigation,
-  route,
-}: AuthStackScreenProps<'VerifyForgotPassword'>) {
-  const email = route.params?.email || '';
+export default function VerifyForgotPasswordScreen() {
+  const navigation = useNavigation();
+  const route = useRoute<RouteProp<AuthStackParamList, 'VerifyForgotPassword'>>();
+  const email = route?.params?.email ?? '';
 
   const [timer, setTimer] = useState(RESEND_INTERVAL_SECONDS);
   const [canResend, setCanResend] = useState(false);
@@ -90,10 +90,9 @@ export default function VerifyForgotPasswordScreen({
           Enter Verification Code
         </AppText>
         <AppText className="text-base font-normal text-muted">
-          We have sent a verification code to
-        </AppText>
-        <AppText className="text-base font-semibold text-heading">
-          {email || 'your email address'}
+          {email
+            ? `We have sent a verification code to ${email}`
+            : 'Enter the verification code sent to your email.'}
         </AppText>
       </View>
 
@@ -103,7 +102,7 @@ export default function VerifyForgotPasswordScreen({
           control={control}
           name="otp"
           length={6}
-          autoFocus={true}
+          autoFocus={false}
         />
       </View>
 

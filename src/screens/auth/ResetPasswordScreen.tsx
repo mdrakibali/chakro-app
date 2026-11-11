@@ -1,3 +1,4 @@
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { Lock } from 'lucide-react-native';
 import React from 'react';
 import { useForm } from 'react-hook-form';
@@ -11,16 +12,15 @@ import {
   ResetPasswordFormData,
   resetPasswordSchema,
 } from '../../schemas';
-import { AuthStackScreenProps } from '../../types/navigation';
+import { AuthStackParamList } from '../../types/navigation';
 import { zodResolver } from '../../utils';
 import AuthLayout from './AuthLayout';
 
-export default function ResetPasswordScreen({
-  navigation,
-  route,
-}: AuthStackScreenProps<'ResetPassword'>) {
-  const email = route.params?.email || '';
-  const resetToken = route.params?.resetToken;
+export default function ResetPasswordScreen() {
+  const navigation = useNavigation();
+  const route = useRoute<RouteProp<AuthStackParamList, 'ResetPassword'>>();
+  const email = route?.params?.email ?? '';
+  const resetToken = route?.params?.resetToken;
 
   const {
     control,

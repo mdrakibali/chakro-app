@@ -1,13 +1,12 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { AppButton, AppText } from '../../components/common';
-import { RootStackScreenProps } from '../../types/navigation';
 
-export default function WelcomeScreen({
-  navigation,
-}: RootStackScreenProps<'Welcome'>) {
+export default function WelcomeScreen() {
+  const navigation = useNavigation();
 
   const handleSignIn = () => {
     navigation.navigate('Auth', { screen: 'SignIn' });

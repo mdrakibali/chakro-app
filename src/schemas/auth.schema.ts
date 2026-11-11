@@ -28,7 +28,7 @@ export const signupSchema = z
   });
 
 export const verifyEmailSchema = z.object({
-  email: z.string().min(1, 'Email is required').email('Please enter a valid email address'),
+  email: z.string().optional(),
   otp: z.string().min(4, 'OTP must be at least 4 digits').max(6, 'OTP cannot exceed 6 digits'),
 });
 
@@ -40,7 +40,7 @@ export const forgotPasswordSchema = z.object({
 });
 
 export const verifyForgotPasswordSchema = z.object({
-  email: z.string().min(1, 'Email is required').email('Please enter a valid email address'),
+  email: z.string().optional(),
   otp: z.string().min(4, 'OTP must be at least 4 digits').max(6, 'OTP cannot exceed 6 digits'),
 });
 

@@ -1,16 +1,15 @@
+import { useNavigation } from '@react-navigation/native';
 import { Check, Lock, Mail, User } from 'lucide-react-native';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Pressable, Text, View } from 'react-native';
 import { AppButton, AppFormInput, AppText } from '../../components';
 import { SignupFormData, signupSchema } from '../../schemas';
-import { AuthStackScreenProps } from '../../types/navigation';
 import { zodResolver } from '../../utils';
 import AuthLayout from './AuthLayout';
 
-export default function SignUpScreen({
-  navigation,
-}: AuthStackScreenProps<'SignUp'>) {
+export default function SignUpScreen() {
+  const navigation = useNavigation();
   const [agreed, setAgreed] = useState<boolean>(false);
 
   const {
@@ -88,8 +87,7 @@ export default function SignUpScreen({
               {agreed && <Check size={14} color="#ffffff" strokeWidth={3} />}
             </View>
             <Text className="text-gray-600 text-sm font-medium">
-              By creating an account, I accept the Terms & Conditions & Privacy
-              Policy.
+              I agree to terms & conditions
             </Text>
           </Pressable>
         </View>
@@ -110,7 +108,10 @@ export default function SignUpScreen({
         <AppText className="text-sm font-normal text-muted">
           Already have an account?{' '}
         </AppText>
-        <Pressable onPress={() => navigation.navigate('SignIn')} hitSlop={8}>
+        <Pressable
+          onPress={() => navigation.navigate('SignIn')}
+          hitSlop={8}
+        >
           <AppText className="text-sm font-bold text-primary">Sign In</AppText>
         </Pressable>
       </View>

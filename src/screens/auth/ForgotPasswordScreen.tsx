@@ -1,16 +1,16 @@
+import { useNavigation } from '@react-navigation/native';
 import { Mail } from 'lucide-react-native';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { View } from 'react-native';
 import { AppButton, AppFormInput, AppText } from '../../components/common';
 import { ForgotPasswordFormData, forgotPasswordSchema } from '../../schemas';
-import { AuthStackScreenProps } from '../../types/navigation';
 import { zodResolver } from '../../utils';
 import AuthLayout from './AuthLayout';
 
-export default function ForgotPasswordScreen({
-  navigation,
-}: AuthStackScreenProps<'ForgotPassword'>) {
+export default function ForgotPasswordScreen() {
+  const navigation = useNavigation();
+
   const {
     control,
     handleSubmit,

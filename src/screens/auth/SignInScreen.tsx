@@ -1,16 +1,16 @@
+import { useNavigation } from '@react-navigation/native';
 import { Lock, Mail } from 'lucide-react-native';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Pressable, View } from 'react-native';
 import { AppButton, AppFormInput, AppText } from '../../components/common';
 import { SignInFormData, signInSchema } from '../../schemas';
-import { AuthStackScreenProps } from '../../types/navigation';
 import { zodResolver } from '../../utils';
 import AuthLayout from './AuthLayout';
 
-export default function SignInScreen({
-  navigation,
-}: AuthStackScreenProps<'SignIn'>) {
+export default function SignInScreen() {
+  const navigation = useNavigation();
+
   const {
     control,
     handleSubmit,
@@ -25,6 +25,7 @@ export default function SignInScreen({
 
   const onSubmit = (data: SignInFormData) => {
     console.log('Login Payload:', data);
+    navigation.navigate('Welcome');
   };
 
   return (
@@ -86,10 +87,7 @@ export default function SignInScreen({
         <AppText className="text-sm font-normal text-muted">
           Don't have an account?{' '}
         </AppText>
-        <Pressable
-          onPress={() => navigation.navigate('SignUp')}
-          hitSlop={8}
-        >
+        <Pressable onPress={() => navigation.navigate('SignUp')} hitSlop={8}>
           <AppText className="text-sm font-bold text-primary">Sign Up</AppText>
         </Pressable>
       </View>

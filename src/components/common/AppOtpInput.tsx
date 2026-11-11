@@ -17,7 +17,7 @@ export default function AppOtpInput({
   onChange,
   length = 6,
   error,
-  autoFocus = true,
+  autoFocus = false,
   className,
 }: AppOtpInputProps) {
   const inputRef = useRef<React.ElementRef<typeof TextInput>>(null);
@@ -33,7 +33,7 @@ export default function AppOtpInput({
   return (
     <View className={cn('w-full items-center', className)}>
       <View className="w-full items-center justify-center relative">
-        {/* Hidden / Transparent Overlay TextInput */}
+        {/* Hidden TextInput */}
         <TextInput
           ref={inputRef}
           value={value}
@@ -64,12 +64,11 @@ export default function AppOtpInput({
               <View
                 key={index}
                 className={cn(
-                  'flex-1 max-w-[50px] h-14 items-center justify-center rounded-xl border bg-surface transition-all',
-                  isCurrent &&
-                    'border-primary ring-2 ring-primary/20 bg-primary/5',
-                  isFilled && !isCurrent && 'border-heading/40 bg-surface',
-                  !isCurrent && !isFilled && 'border-border bg-surface',
-                  error && 'border-red-500 bg-red-50/20',
+                  'flex-1 max-w-[50px] h-14 items-center justify-center rounded-xl border bg-surface',
+                  isCurrent && 'border-2 border-primary',
+                  isFilled && !isCurrent && 'border-heading/40',
+                  !isCurrent && !isFilled && 'border-border',
+                  error && 'border-red-500 bg-red-50',
                 )}
               >
                 <AppText className="text-2xl font-bold text-heading">
@@ -94,12 +93,8 @@ export default function AppOtpInput({
 const styles = StyleSheet.create({
   hiddenInput: {
     position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    opacity: 0.01,
-    fontSize: 1,
-    zIndex: 1,
+    opacity: 0,
+    width: 1,
+    height: 1,
   },
 });
