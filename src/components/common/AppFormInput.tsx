@@ -15,18 +15,10 @@ export interface AppFormInputProps<
   control: Control<TFieldValues>;
 }
 
-/**
- * Form-bound input component for react-hook-form.
- * Automatically connects value, onChangeText, onBlur, and validation error messages.
- */
 export default function AppFormInput<
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
->({
-  name,
-  control,
-  ...props
-}: AppFormInputProps<TFieldValues, TName>) {
+>({ name, control, ...props }: AppFormInputProps<TFieldValues, TName>) {
   const {
     field: { value, onChange, onBlur },
     fieldState: { error },
@@ -45,4 +37,3 @@ export default function AppFormInput<
     />
   );
 }
-

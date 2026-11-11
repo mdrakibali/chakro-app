@@ -26,8 +26,10 @@ export default function SignUpScreen() {
   });
 
   const onSubmit = (data: SignupFormData) => {
-    console.log('Login Payload:', data);
+    console.log('Sign Up Payload:', data);
+    navigation.navigate('VerifyEmail', { email: data.email });
   };
+
   return (
     <AuthLayout title="Sign Up">
       {/* Title & Description */}
@@ -101,13 +103,13 @@ export default function SignUpScreen() {
         Sign Up
       </AppButton>
 
-      {/* Sign Up Link */}
+      {/* Sign In Link */}
       <View className="w-full flex-row items-center justify-center mt-6">
         <AppText className="text-sm font-normal text-muted">
           Already have an account?{' '}
         </AppText>
         <Pressable
-          onPress={() => navigation.navigate('Auth', { screen: 'SignIn' })}
+          onPress={() => navigation.navigate('SignIn')}
           hitSlop={8}
         >
           <AppText className="text-sm font-bold text-primary">Sign In</AppText>

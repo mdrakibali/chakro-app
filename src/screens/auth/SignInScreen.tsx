@@ -61,9 +61,7 @@ export default function SignInScreen() {
 
         {/* Forgot Password */}
         <Pressable
-          onPress={() =>
-            navigation.navigate('Auth', { screen: 'ForgotPassword' })
-          }
+          onPress={() => navigation.navigate('ForgotPassword')}
           className="self-end pt-1"
           hitSlop={8}
         >
@@ -89,7 +87,7 @@ export default function SignInScreen() {
           Don't have an account?{' '}
         </AppText>
         <Pressable
-          onPress={() => navigation.navigate('Auth', { screen: 'SignUp' })}
+          onPress={() => navigation.navigate('SignUp')}
           hitSlop={8}
         >
           <AppText className="text-sm font-bold text-primary">Sign Up</AppText>
