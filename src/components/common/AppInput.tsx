@@ -23,7 +23,7 @@ export default function AppInput({
   leftIcon,
   containerClassName,
   inputClassName,
-  placeholderTextColor = '#9CA3AF',
+  placeholderTextColor = '#585858',
   ...rest
 }: AppInputProps) {
   const [showPassword, setShowPassword] = useState(!isPassword);
@@ -31,21 +31,24 @@ export default function AppInput({
   return (
     <View className={cn('w-full', containerClassName)}>
       {label && (
-        <AppText className="mb-1.5 text-sm font-medium text-heading">
+        <AppText className="mb-1.5 text-lg font-medium text-heading">
           {label}
         </AppText>
       )}
 
       <View
         className={cn(
-          'w-full flex-row items-center rounded-2xl border bg-surface px-4 py-3',
-          error ? 'border-red-500' : 'border-border'
+          'w-full flex-row items-center rounded-lg border bg-surface px-4 py-1.5',
+          error ? 'border-red-500' : 'border-surface',
         )}
       >
-        {leftIcon && <View className="mr-3">{leftIcon}</View>}
+        {leftIcon && <View className="mr-2">{leftIcon}</View>}
 
         <TextInput
-          className={cn('flex-1 font-normal text-base text-heading', inputClassName)}
+          className={cn(
+            'flex-1 font-normal text-base text-heading',
+            inputClassName,
+          )}
           placeholderTextColor={placeholderTextColor}
           secureTextEntry={isPassword && !showPassword}
           autoCapitalize="none"
@@ -59,9 +62,9 @@ export default function AppInput({
             className="ml-2"
           >
             {showPassword ? (
-              <EyeOff size={20} color="#9CA3AF" />
+              <EyeOff size={24} color="#9CA3AF" />
             ) : (
-              <Eye size={20} color="#9CA3AF" />
+              <Eye size={24} color="#9CA3AF" />
             )}
           </Pressable>
         )}

@@ -30,7 +30,7 @@ export default function AuthLayout({ children, title }: AuthLayoutProps) {
     >
       <SafeAreaView className="flex-1 px-6 pt-2 pb-6">
         {/* Top Header */}
-        <View className="flex-row items-center justify-between mb-6">
+        <View className="flex-row items-center justify-between mb-8">
           <Pressable
             className="h-10 w-10 items-center justify-center rounded-full border border-border bg-surface active:opacity-70"
             onPress={handleBack}
@@ -43,7 +43,6 @@ export default function AuthLayout({ children, title }: AuthLayoutProps) {
             {headerTitle}
           </AppText>
         </View>
-
         {/* Content */}
         <View className="flex-1">{children}</View>
       </SafeAreaView>

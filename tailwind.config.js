@@ -18,7 +18,7 @@ module.exports = {
           light: '#FFF2E8',
         },
         secondary: {
-          DEFAULT: '#07151E',
+          DEFAULT: '#585858',
           surface: '#0E2331',
         },
 
@@ -28,8 +28,8 @@ module.exports = {
         'accent-yellow': '#FECC32',
 
         // Light Theme
-        background: '#F4F7F9',
-        surface: '#FFFFFF',
+        background: '#FFFFFF',
+        surface: '#F4F4F4',
         card: '#FFFFFF',
         heading: '#111827',
         foreground: '#374151',
