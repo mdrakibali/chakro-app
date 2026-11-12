@@ -25,7 +25,7 @@ export default function SignInScreen() {
 
   const onSubmit = (data: SignInFormData) => {
     console.log('Login Payload:', data);
-    navigation.navigate('Welcome');
+    navigation.getParent()?.navigate('Main');
   };
 
   return (

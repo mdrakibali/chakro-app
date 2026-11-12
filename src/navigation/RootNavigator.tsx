@@ -4,6 +4,7 @@ import OnboardingScreen from '../screens/onboarding/OnboardingScreen';
 import WelcomeScreen from '../screens/onboarding/WelcomeScreen';
 import { RootStackParamList } from '../types/navigation';
 import AuthNavigator from './AuthNavigator';
+import MainNavigator from './MainNavigator';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -30,6 +31,13 @@ export default function RootNavigator() {
       <Stack.Screen
         name="Auth"
         component={AuthNavigator}
+        options={{
+          animation: 'slide_from_right',
+        }}
+      />
+      <Stack.Screen
+        name="Main"
+        component={MainNavigator}
         options={{
           animation: 'slide_from_right',
         }}
