@@ -7,34 +7,57 @@ import { AppText } from '../common';
 
 interface TabItemConfig {
   label: string;
-  IconComponent: React.ComponentType<{
-    size?: number;
-    color?: string;
-    strokeWidth?: number;
-  }>;
+  renderIcon: (isFocused: boolean) => React.ReactNode;
 }
+
+const ACTIVE_COLOR = '#F07828';
+const INACTIVE_COLOR = '#9CA3AF';
 
 const TAB_CONFIG: Record<string, TabItemConfig> = {
   Home: {
     label: 'Home',
-    IconComponent: Home,
+    renderIcon: isFocused => (
+      <Home
+        size={22}
+        color={isFocused ? ACTIVE_COLOR : INACTIVE_COLOR}
+        fill={isFocused ? ACTIVE_COLOR : 'none'}
+        strokeWidth={isFocused ? 2.2 : 1.8}
+      />
+    ),
   },
   Explore: {
     label: 'Explore',
-    IconComponent: Compass,
+    renderIcon: isFocused => (
+      <Compass
+        size={22}
+        color={isFocused ? ACTIVE_COLOR : INACTIVE_COLOR}
+        strokeWidth={isFocused ? 2.4 : 1.8}
+      />
+    ),
   },
   Wishlist: {
     label: 'Wishlist',
-    IconComponent: Heart,
+    renderIcon: isFocused => (
+      <Heart
+        size={22}
+        color={isFocused ? ACTIVE_COLOR : INACTIVE_COLOR}
+        fill={isFocused ? ACTIVE_COLOR : 'none'}
+        strokeWidth={isFocused ? 2.2 : 1.8}
+      />
+    ),
   },
   Profile: {
     label: 'Profile',
-    IconComponent: User,
+    renderIcon: isFocused => (
+      <User
+        size={22}
+        color={isFocused ? ACTIVE_COLOR : INACTIVE_COLOR}
+        fill={isFocused ? ACTIVE_COLOR : 'none'}
+        strokeWidth={isFocused ? 2.2 : 1.8}
+      />
+    ),
   },
 };
-
-const ACTIVE_COLOR = '#F07828';
-const INACTIVE_COLOR = '#9CA3AF';
 
 export default function CustomBottomTabBar({
   state,
@@ -45,17 +68,22 @@ export default function CustomBottomTabBar({
 
   return (
     <View
-      style={[styles.container, { paddingBottom: Math.max(insets.bottom, 12) }]}
-      className="w-full bg-background flex-row justify-around items-center pt-3 shadow-sm"
+      style={[
+        styles.floatingContainer,
+        {
+          bottom: Math.max(insets.bottom, 12),
+        },
+      ]}
+      className="flex-row items-center justify-around bg-surface py-2.5 rounded-full"
     >
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
         const isFocused = state.index === index;
         const config = TAB_CONFIG[route.name] || {
           label: route.name,
-          IconComponent: Home,
+          renderIcon: () => <Home size={22} color={INACTIVE_COLOR} />,
         };
-        const { label, IconComponent } = config;
+        const { label, renderIcon } = config;
 
         const onPress = () => {
           const event = navigation.emit({
@@ -76,8 +104,6 @@ export default function CustomBottomTabBar({
           });
         };
 
-        const currentColor = isFocused ? ACTIVE_COLOR : INACTIVE_COLOR;
-
         return (
           <Pressable
             key={route.key}
@@ -87,18 +113,21 @@ export default function CustomBottomTabBar({
             testID={options.tabBarButtonTestID}
             onPress={onPress}
             onLongPress={onLongPress}
-            className="flex-1 items-center justify-center py-1"
-            hitSlop={8}
+            className="flex-1 items-center justify-center py-1 active:opacity-80"
+            hitSlop={6}
           >
-            <IconComponent
-              size={24}
-              color={currentColor}
-              strokeWidth={isFocused ? 2.5 : 2}
-            />
+            {/* Tab Icon */}
+            <View className="items-center justify-center">
+              {renderIcon(isFocused)}
+            </View>
 
+            {/* Tab Label */}
             <AppText
-              style={{ color: currentColor }}
-              className={`text-xs mt-1 ${isFocused ? 'font-semibold' : 'font-medium'}`}
+              className={`text-[11px] mt-1 ${
+                isFocused
+                  ? 'font-bold text-primary'
+                  : 'font-medium text-[#9CA3AF]'
+              }`}
             >
               {label}
             </AppText>
@@ -110,8 +139,10 @@ export default function CustomBottomTabBar({
 }
 
 const styles = StyleSheet.create({
-  container: {
-    borderTopLeftRadius: 24,
-    borderTopRightRadius: 24,
+  floatingContainer: {
+    position: 'absolute',
+    left: 18,
+    right: 18,
+    elevation: 12,
   },
 });
