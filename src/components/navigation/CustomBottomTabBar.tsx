@@ -2,7 +2,6 @@ import type { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { Compass, Heart, Home, User } from 'lucide-react-native';
 import React from 'react';
 import { Pressable, View } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AppText } from '../common';
 
 interface TabItemConfig {
@@ -11,7 +10,7 @@ interface TabItemConfig {
 }
 
 const ACTIVE_COLOR = '#F07828';
-const INACTIVE_COLOR = '#9CA3AF';
+const INACTIVE_COLOR = '#9E9E9E';
 
 const TAB_CONFIG: Record<string, TabItemConfig> = {
   Home: {
@@ -64,15 +63,8 @@ export default function CustomBottomTabBar({
   descriptors,
   navigation,
 }: BottomTabBarProps) {
-  const insets = useSafeAreaInsets();
-
   return (
-    <View
-      style={{
-        bottom: Math.max(insets.bottom, 12),
-      }}
-      className="absolute left-4 right-4 flex-row items-center justify-around bg-surface py-2.5 rounded-full shadow-2xl"
-    >
+    <View className="w-full flex-row items-center justify-around bg-surface pt-3 pb-5 rounded-t-2xl">
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
         const isFocused = state.index === index;
@@ -123,7 +115,7 @@ export default function CustomBottomTabBar({
               className={`text-[11px] mt-1 ${
                 isFocused
                   ? 'font-bold text-primary'
-                  : 'font-medium text-[#9CA3AF]'
+                  : 'font-medium text-secondary'
               }`}
             >
               {label}

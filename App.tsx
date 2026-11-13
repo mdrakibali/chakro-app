@@ -1,4 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
+import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { NavigationContainer } from '@react-navigation/native';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { StatusBar } from 'react-native';
@@ -16,10 +17,12 @@ function App() {
       <SafeAreaProvider>
         <ThemeProvider>
           <QueryClientProvider client={queryClient}>
-            <StatusBar barStyle={'dark-content'} />
-            <NavigationContainer>
-              <RootNavigator />
-            </NavigationContainer>
+            <BottomSheetModalProvider>
+              <StatusBar barStyle={'dark-content'} />
+              <NavigationContainer>
+                <RootNavigator />
+              </NavigationContainer>
+            </BottomSheetModalProvider>
           </QueryClientProvider>
         </ThemeProvider>
       </SafeAreaProvider>

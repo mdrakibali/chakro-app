@@ -90,7 +90,16 @@ export default function AppButton({
       ) : (
         <>
           {leftIcon && <>{leftIcon}</>}
-          {typeof children === 'string' || typeof children === 'number' ? (
+          {typeof children === 'string' ||
+          typeof children === 'number' ||
+          (Array.isArray(children) &&
+            children.every(
+              c =>
+                typeof c === 'string' ||
+                typeof c === 'number' ||
+                c === null ||
+                c === undefined,
+            )) ? (
             <AppText
               className={cn(
                 'text-center',
