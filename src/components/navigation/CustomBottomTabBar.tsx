@@ -1,7 +1,7 @@
 import type { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { Compass, Heart, Home, User } from 'lucide-react-native';
 import React from 'react';
-import { Pressable, StyleSheet, View } from 'react-native';
+import { Pressable, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AppText } from '../common';
 
@@ -68,13 +68,10 @@ export default function CustomBottomTabBar({
 
   return (
     <View
-      style={[
-        styles.floatingContainer,
-        {
-          bottom: Math.max(insets.bottom, 12),
-        },
-      ]}
-      className="flex-row items-center justify-around bg-surface py-2.5 rounded-full"
+      style={{
+        bottom: Math.max(insets.bottom, 12),
+      }}
+      className="absolute left-4 right-4 flex-row items-center justify-around bg-surface py-2.5 rounded-full shadow-2xl"
     >
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
@@ -137,12 +134,3 @@ export default function CustomBottomTabBar({
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  floatingContainer: {
-    position: 'absolute',
-    left: 18,
-    right: 18,
-    elevation: 12,
-  },
-});

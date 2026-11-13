@@ -19,10 +19,8 @@ export default function HomeScreen() {
   const navigation = useNavigation();
 
   // State management
-  const [selectedBrandId, setSelectedBrandId] = useState<string | null>(null);
   const [hasUnread, setHasUnread] = useState(true);
   const [favoriteIds, setFavoriteIds] = useState<string[]>(['car-2']);
-  const [searchQuery, setSearchQuery] = useState('');
 
   // Toggle favorite car
   const handleToggleFavorite = (carId: string) => {
@@ -31,40 +29,29 @@ export default function HomeScreen() {
     );
   };
 
-  // Toggle brand filter
+  // Route brand selection directly to Explore
   const handleSelectBrand = (brand: Brand) => {
-    setSelectedBrandId(prev => (prev === brand.id ? null : brand.id));
+    navigation.navigate('Explore', {
+      brandId: brand.id,
+      brand: brand.name,
+    });
   };
 
-  // Filter cars based on brand and search query
-  const filteredCars = useMemo(() => {
-    return MOCK_CARS.filter(car => {
-      if (selectedBrandId) {
-        const brandObj = MOCK_BRANDS.find(b => b.id === selectedBrandId);
-        if (
-          brandObj &&
-          !car.brand.toLowerCase().includes(brandObj.name.toLowerCase())
-        ) {
-          return false;
-        }
-      }
+  const handleSeeAllBrands = () => {
+    navigation.navigate('Explore');
+  };
 
-      if (searchQuery.trim().length > 0) {
-        const q = searchQuery.toLowerCase();
-        return (
-          car.name.toLowerCase().includes(q) ||
-          car.brand.toLowerCase().includes(q) ||
-          car.category.toLowerCase().includes(q)
-        );
-      }
+  const handleSearchPress = () => {
+    navigation.navigate('Explore');
+  };
 
-      return true;
-    });
-  }, [selectedBrandId, searchQuery]);
+  const handleFilterPress = () => {
+    navigation.navigate('Explore');
+  };
 
   const popularCars = useMemo(() => {
-    return filteredCars.filter(car => car.isPopular);
-  }, [filteredCars]);
+    return MOCK_CARS.filter(car => car.isPopular);
+  }, []);
 
   const handleNotificationPress = () => {
     setHasUnread(false);
@@ -72,10 +59,6 @@ export default function HomeScreen() {
 
   const handleCarPress = (car: Car) => {
     console.log('Selected car:', car.name);
-  };
-
-  const handleSeeAllBrands = () => {
-    setSelectedBrandId(null);
   };
 
   const handleSeeAllCars = () => {
@@ -86,23 +69,17 @@ export default function HomeScreen() {
     console.log('Banner clicked:', banner.title);
   };
 
-  const handleSearchPress = () => {
-    navigation.navigate('Explore');
-  };
-
   return (
     <View className="flex-1 bg-background">
       <StatusBar barStyle="dark-content" />
 
-      {/* 1. Header (Format matching Image 1) */}
+      {/* 1. Header with search trigger & filter button */}
       <HomeHeader
         user={CURRENT_USER}
         location={INITIAL_LOCATION}
         hasUnreadNotifications={hasUnread}
-        searchQuery={searchQuery}
-        onSearchChange={setSearchQuery}
         onSearchPress={handleSearchPress}
-        onFilterPress={handleSearchPress}
+        onFilterPress={handleFilterPress}
         onNotificationPress={handleNotificationPress}
       />
 
@@ -115,14 +92,13 @@ export default function HomeScreen() {
           {/* 2. Automotive Brands */}
           <BrandSection
             brands={MOCK_BRANDS}
-            selectedBrandId={selectedBrandId}
             onSelectBrand={handleSelectBrand}
             onSeeAllPress={handleSeeAllBrands}
           />
 
           {/* 3. Popular Cars Horizontal Carousel (Sliding cards) */}
           <PopularCarsCarousel
-            cars={popularCars.length > 0 ? popularCars : filteredCars}
+            cars={popularCars}
             favoriteIds={favoriteIds}
             onToggleFavorite={handleToggleFavorite}
             onCarPress={handleCarPress}
@@ -138,7 +114,7 @@ export default function HomeScreen() {
           {/* 5. Featured Fleet Section (Vertical Cards) */}
           <FeaturedCarsSection
             title="Featured Fleet"
-            cars={filteredCars}
+            cars={MOCK_CARS}
             favoriteIds={favoriteIds}
             onToggleFavorite={handleToggleFavorite}
             onCarPress={handleCarPress}

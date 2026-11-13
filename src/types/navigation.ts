@@ -4,7 +4,7 @@ import type { NavigatorScreenParams } from '@react-navigation/native';
 // Home Tab Stack
 export type MainTabParamList = {
   Home: undefined;
-  Explore: undefined;
+  Explore: { brandId?: string; brand?: string; search?: string } | undefined;
   Wishlist: undefined;
   Profile: undefined;
 };

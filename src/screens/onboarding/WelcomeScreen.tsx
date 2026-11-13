@@ -17,7 +17,7 @@ export default function WelcomeScreen() {
   };
 
   return (
-    <View className="flex-1 bg-black">
+    <View className="w-full flex-1">
       {/* Background Car & Mountain Road Image */}
       <Image
         source={require('../../assets/images/cars/welcome.png')}

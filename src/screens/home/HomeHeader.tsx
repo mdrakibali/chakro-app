@@ -1,6 +1,6 @@
 import { Bell, ChevronDown, Search, SlidersHorizontal } from 'lucide-react-native';
 import React from 'react';
-import { Image, Pressable, TextInput, View } from 'react-native';
+import { Image, Pressable, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { AppText } from '../../components/common';
 import { UserLocation, UserProfile } from '../../types';
@@ -9,8 +9,6 @@ export interface HomeHeaderProps {
   user: UserProfile;
   location: UserLocation;
   hasUnreadNotifications?: boolean;
-  searchQuery?: string;
-  onSearchChange?: (text: string) => void;
   onProfilePress?: () => void;
   onLocationPress?: () => void;
   onNotificationPress?: () => void;
@@ -22,8 +20,6 @@ export default function HomeHeader({
   user,
   location,
   hasUnreadNotifications = true,
-  searchQuery = '',
-  onSearchChange,
   onProfilePress,
   onLocationPress,
   onNotificationPress,
@@ -88,20 +84,16 @@ export default function HomeHeader({
 
       {/* Bottom Row: Full Rounded Search Bar & Filter Button */}
       <View className="flex-row items-center">
-        {/* Search Input Box */}
+        {/* Search Pressable Trigger */}
         <Pressable
           onPress={onSearchPress}
-          className="flex-1 flex-row items-center bg-surface rounded-full px-4 py-2.5 border border-border/80"
+          className="flex-1 flex-row items-center bg-surface rounded-full px-4 py-2.5 border border-border/80 active:opacity-80"
+          hitSlop={4}
         >
           <Search size={19} color="#6B7280" />
-          <TextInput
-            value={searchQuery}
-            onChangeText={onSearchChange}
-            placeholder="Search cars or brands..."
-            placeholderTextColor="#9CA3AF"
-            className="flex-1 ml-2.5 text-sm font-normal text-heading py-0"
-            onFocus={onSearchPress}
-          />
+          <AppText className="ml-2.5 text-sm font-normal text-muted">
+            Search cars or brands...
+          </AppText>
         </Pressable>
 
         {/* Circular Filter Button */}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { Brand } from '../../types';
 import BrandItem from './BrandItem';
 import SectionHeader from './SectionHeader';
@@ -30,26 +30,19 @@ export default function BrandSection({
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.listContent}
+        className="w-full"
       >
-        {brands.map(brand => (
-          <BrandItem
-            key={brand.id}
-            brand={brand}
-            isSelected={selectedBrandId === brand.id}
-            onPress={onSelectBrand}
-          />
-        ))}
+        <View className="flex-row pl-5 pr-1 pt-1 pb-2">
+          {brands.map(brand => (
+            <BrandItem
+              key={brand.id}
+              brand={brand}
+              isSelected={selectedBrandId === brand.id}
+              onPress={onSelectBrand}
+            />
+          ))}
+        </View>
       </ScrollView>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  listContent: {
-    paddingHorizontal: 20,
-    paddingTop: 4,
-    paddingBottom: 8,
-  },
-});
-

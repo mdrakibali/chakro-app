@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
-import { Image, Pressable, View } from 'react-native';
+import { Image, Pressable, StatusBar, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { AppButton, AppText } from '../../components/common';
 import { ONBOARDING_SLIDES } from '../../constants/onboarding';
@@ -26,6 +26,7 @@ export default function OnboardingScreen() {
 
   return (
     <View className="w-full h-full flex-1">
+      <StatusBar barStyle="light-content" />
       {/* Background Car Image */}
       <Image
         source={require('../../assets/images/cars/onboarding.png')}

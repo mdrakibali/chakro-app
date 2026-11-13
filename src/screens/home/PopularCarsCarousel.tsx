@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { AppText } from '../../components/common';
 import { Car } from '../../types';
 import CarCard from './CarCard';
@@ -40,29 +40,22 @@ export default function PopularCarsCarousel({
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.listContent}
+          className="w-full"
         >
-          {cars.map(car => (
-            <View key={car.id} className="w-[285px] mr-4">
-              <CarCard
-                car={car}
-                isFavorite={favoriteIds.includes(car.id)}
-                onPress={onCarPress}
-                onToggleFavorite={onToggleFavorite}
-              />
-            </View>
-          ))}
+          <View className="flex-row pl-5 pr-1 pt-1">
+            {cars.map(car => (
+              <View key={car.id} className="w-[285px] mr-4">
+                <CarCard
+                  car={car}
+                  isFavorite={favoriteIds.includes(car.id)}
+                  onPress={onCarPress}
+                  onToggleFavorite={onToggleFavorite}
+                />
+              </View>
+            ))}
+          </View>
         </ScrollView>
       )}
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  listContent: {
-    paddingLeft: 20,
-    paddingRight: 4,
-    paddingTop: 4,
-  },
-});
-
