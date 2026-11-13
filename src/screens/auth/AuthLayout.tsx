@@ -15,6 +15,8 @@ import { AppText } from '../../components/common';
 export interface AuthLayoutProps {
   children: React.ReactNode;
   title?: string;
+  showBackButton?: boolean;
+  onBackPress?: () => void;
   scrollable?: boolean;
   autoScrollOnKeyboard?: boolean;
 }
@@ -22,6 +24,8 @@ export interface AuthLayoutProps {
 export default function AuthLayout({
   children,
   title,
+  showBackButton = true,
+  onBackPress,
   scrollable = true,
   autoScrollOnKeyboard = true,
 }: AuthLayoutProps) {
@@ -31,7 +35,9 @@ export default function AuthLayout({
   const [keyboardSpace, setKeyboardSpace] = useState<number>(0);
 
   const handleBack = () => {
-    if (navigation.canGoBack()) {
+    if (onBackPress) {
+      onBackPress();
+    } else if (navigation.canGoBack()) {
       navigation.goBack();
     } else {
       navigation.getParent()?.goBack();
@@ -72,13 +78,17 @@ export default function AuthLayout({
       <SafeAreaView className="flex-1">
         {/* Fixed Top Header */}
         <View className="flex-row items-center justify-between px-6 pt-2 mb-4">
-          <Pressable
-            className="h-10 w-10 items-center justify-center rounded-full border border-border bg-surface active:opacity-70"
-            onPress={handleBack}
-            hitSlop={10}
-          >
-            <ChevronLeft size={20} color="#111827" />
-          </Pressable>
+          {showBackButton ? (
+            <Pressable
+              className="h-10 w-10 items-center justify-center rounded-full border border-border bg-surface active:opacity-70"
+              onPress={handleBack}
+              hitSlop={10}
+            >
+              <ChevronLeft size={20} color="#111827" />
+            </Pressable>
+          ) : (
+            <View className="h-10 w-10" />
+          )}
 
           <AppText className="text-xl font-bold text-heading">
             {headerTitle}

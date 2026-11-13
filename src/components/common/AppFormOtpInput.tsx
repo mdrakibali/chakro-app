@@ -1,9 +1,9 @@
 import React from 'react';
 import {
   Control,
+  Controller,
   FieldPath,
   FieldValues,
-  useController,
 } from 'react-hook-form';
 import AppOtpInput, { AppOtpInputProps } from './AppOtpInput';
 
@@ -19,20 +19,18 @@ export default function AppFormOtpInput<
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 >({ name, control, ...props }: AppFormOtpInputProps<TFieldValues, TName>) {
-  const {
-    field: { value, onChange },
-    fieldState: { error },
-  } = useController({
-    name,
-    control,
-  });
-
   return (
-    <AppOtpInput
-      value={value ?? ''}
-      onChange={onChange}
-      error={error?.message}
-      {...props}
+    <Controller
+      control={control}
+      name={name}
+      render={({ field: { value, onChange }, fieldState: { error } }) => (
+        <AppOtpInput
+          value={value ?? ''}
+          onChange={onChange}
+          error={error?.message}
+          {...props}
+        />
+      )}
     />
   );
 }

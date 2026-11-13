@@ -48,17 +48,15 @@ export default function WelcomeScreen() {
         {/* Center Hero Branding Section */}
         <View className="flex-1 items-center justify-center">
           {/* Glassmorphic Logo Container */}
-          <View className="h-24 w-24 items-center justify-center rounded-3xl border border-white/20 bg-white/10 shadow-xl">
-            <Image
-              source={require('../../assets/logo/chakro-app-icon.png')}
-              className="h-20 w-20 rounded-2xl"
-              resizeMode="contain"
-            />
-          </View>
+          <Image
+            source={require('../../assets/logo/cabrio-app-icon.png')}
+            className="h-24 w-24 rounded-2xl"
+            resizeMode="contain"
+          />
 
           {/* Title */}
           <AppText className="mt-6 text-center text-4xl font-bold tracking-tight text-white">
-            Welcome to Chakro
+            Welcome to Cabrio
           </AppText>
 
           {/* Tagline */}

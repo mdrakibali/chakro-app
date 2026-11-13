@@ -14,3 +14,7 @@ configureReanimatedLogger({
 });
 
 AppRegistry.registerComponent(appName, () => App);
+// Fallback registrations for native bridge compatibility
+AppRegistry.registerComponent('CHAKRO', () => App);
+AppRegistry.registerComponent('cabrio', () => App);
+AppRegistry.registerComponent('Cabrio', () => App);

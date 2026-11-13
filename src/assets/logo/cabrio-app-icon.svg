@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><rect x="0" y="0" width="512" height="512" rx="112" fill="#F07828"/><g transform="translate(12,28) scale(2.05)">
+<path d="M153 46 A75 75 0 1 0 153 174" fill="none" stroke="#FFFFFF" stroke-width="22" stroke-linecap="square"/>
+<!-- Premium sedan silhouette, intertwined with upper opening of C -->
+<path d="M63 119 C79 118 86 112 96 101 C105 91 119 87 135 87 L151 87 C162 88 174 100 186 109 L205 112 C213 114 219 119 221 125 L221 132" fill="none" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M83 130 C108 129 132 129 153 129 L219 129" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/>
+<path d="M111 103 C121 94 133 94 148 94 C158 94 168 102 177 109 L109 109 Z" fill="#FFFFFF"/>
+<path d="M148 95 L151 109" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+<path d="M190 120 L215 122" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+</g></svg>

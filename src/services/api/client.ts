@@ -2,7 +2,7 @@ import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
 import { authStorage } from '../storage';
 
 // Base API configuration (can be moved to .env in future)
-export const BASE_URL = 'https://api.chakro.app/v1';
+export const BASE_URL = 'https://api.cabrio.app/v1';
 
 export const apiClient = axios.create({
   baseURL: BASE_URL,

@@ -29,7 +29,7 @@ export default function SignInScreen() {
   };
 
   return (
-    <AuthLayout title="Sign In">
+    <AuthLayout title="Sign In" showBackButton={false}>
       {/* Title & Description */}
       <View className="w-full gap-2 pb-6">
         <AppText className="text-2xl font-bold text-heading">

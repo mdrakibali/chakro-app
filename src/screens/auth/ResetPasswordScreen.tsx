@@ -46,7 +46,7 @@ export default function ResetPasswordScreen() {
   };
 
   return (
-    <AuthLayout title="Reset Password">
+    <AuthLayout title="Reset Password" showBackButton={false}>
       {/* Title & Description */}
       <View className="w-full gap-2 pb-6">
         <AppText className="text-2xl font-bold text-heading">
