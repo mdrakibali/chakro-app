@@ -1,4 +1,9 @@
-import { Bell, ChevronDown, Search, SlidersHorizontal } from 'lucide-react-native';
+import {
+  Bell,
+  ChevronDown,
+  Search,
+  SlidersHorizontal,
+} from 'lucide-react-native';
 import React from 'react';
 import { Image, Pressable, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -27,7 +32,10 @@ export default function HomeHeader({
   onSearchPress,
 }: HomeHeaderProps) {
   return (
-    <SafeAreaView edges={['top']} className="bg-white px-5 pt-1 pb-3 border-b border-border/40">
+    <SafeAreaView
+      edges={['top']}
+      className="bg-white px-5 pt-1 pb-3 border-b border-border/40"
+    >
       {/* Top Row: User Avatar, Name, Location & Notification Bell */}
       <View className="flex-row items-center justify-between pb-3.5">
         {/* Left: User Avatar + Name + Location Dropdown */}
@@ -42,9 +50,6 @@ export default function HomeHeader({
               source={{ uri: user.avatarUrl }}
               className="h-11 w-11 rounded-full border border-border"
             />
-            {user.isVerified && (
-              <View className="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-emerald-500 border border-white" />
-            )}
           </View>
 
           {/* Name & Location Subtitle */}
@@ -61,7 +66,10 @@ export default function HomeHeader({
               className="flex-row items-center mt-0.5 active:opacity-75"
               hitSlop={6}
             >
-              <AppText className="text-xs font-normal text-muted" numberOfLines={1}>
+              <AppText
+                className="text-xs font-normal text-muted"
+                numberOfLines={1}
+              >
                 {location.city}, {location.country}
               </AppText>
               <ChevronDown size={14} color="#6B7280" className="ml-1" />
