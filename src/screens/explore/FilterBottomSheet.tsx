@@ -1,11 +1,16 @@
-import {
+import BottomSheet, {
   BottomSheetBackdrop,
   BottomSheetBackdropProps,
-  BottomSheetModal,
   BottomSheetScrollView,
 } from '@gorhom/bottom-sheet';
 import { Check, KeyRound, RotateCcw, X } from 'lucide-react-native';
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { Pressable, View } from 'react-native';
 import { AppButton, AppText } from '../../components/common';
 import {
@@ -34,17 +39,17 @@ export default function FilterBottomSheet({
   onReset,
   matchingCount,
 }: FilterBottomSheetProps) {
-  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+  const bottomSheetRef = useRef<BottomSheet>(null);
   const snapPoints = useMemo(() => ['82%'], []);
   const [localFilters, setLocalFilters] = useState<FilterState>(filters);
 
-  // Sync visible state with BottomSheetModal
+  // Sync visible state with BottomSheet
   useEffect(() => {
     if (visible) {
       setLocalFilters(filters);
-      bottomSheetModalRef.current?.present();
+      bottomSheetRef.current?.snapToIndex(0);
     } else {
-      bottomSheetModalRef.current?.dismiss();
+      bottomSheetRef.current?.close();
     }
   }, [visible, filters]);
 
@@ -55,12 +60,18 @@ export default function FilterBottomSheet({
 
   const handleApply = () => {
     onApply(localFilters);
-    bottomSheetModalRef.current?.dismiss();
+    bottomSheetRef.current?.close();
+    onClose();
   };
 
-  const handleDismiss = useCallback(() => {
-    onClose();
-  }, [onClose]);
+  const handleSheetChanges = useCallback(
+    (index: number) => {
+      if (index === -1) {
+        onClose();
+      }
+    },
+    [onClose],
+  );
 
   const renderBackdrop = useCallback(
     (props: BottomSheetBackdropProps) => (
@@ -90,10 +101,11 @@ export default function FilterBottomSheet({
   );
 
   return (
-    <BottomSheetModal
-      ref={bottomSheetModalRef}
+    <BottomSheet
+      ref={bottomSheetRef}
+      index={visible ? 0 : -1}
       snapPoints={snapPoints}
-      onDismiss={handleDismiss}
+      onChange={handleSheetChanges}
       backdropComponent={renderBackdrop}
       handleComponent={renderHandle}
       backgroundComponent={renderBackground}
@@ -124,7 +136,10 @@ export default function FilterBottomSheet({
             </Pressable>
 
             <Pressable
-              onPress={() => bottomSheetModalRef.current?.dismiss()}
+              onPress={() => {
+                bottomSheetRef.current?.close();
+                onClose();
+              }}
               hitSlop={8}
               className="h-8 w-8 items-center justify-center rounded-full bg-surface border border-border/60 active:opacity-75"
             >
@@ -338,6 +353,6 @@ export default function FilterBottomSheet({
           </AppButton>
         </View>
       </View>
-    </BottomSheetModal>
+    </BottomSheet>
   );
 }
